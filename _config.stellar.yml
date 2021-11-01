@@ -1,0 +1,23 @@
+sidebar:
+  # logo:
+  #   title: '[<img no-lazy height="32px" style="border-radius: 50%" src="https://avatars.githubusercontent.com/u/37452715"/>](/)'
+
+  menu:
+    post: '[btn.blog](/)'
+    # wiki: '[btn.wiki](/wiki/)'
+    # notes: '[笔记](/notes/)'
+
+article:
+  # npm i hexo-related-popular-posts
+  related_posts:
+    enable: true
+    title: 您可能感兴趣的文章
+
+  auto_cover: true
+  auto_excerpt: 200
+
+footer:
+  social:
+    - title: GitHub
+      icon: '<img src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.3/social/08a41b181ce68.svg"/>'
+      url: https://github.com/editso

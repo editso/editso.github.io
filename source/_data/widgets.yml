@@ -1,0 +1,11 @@
+welcome:
+  layout: markdown
+  title: "..."
+  content:
+    - 这个人很懒, 什么都不想写
+
+toc:
+  layout: toc
+  list_number: false
+  min_depth: 2
+  max_depth: 5
