@@ -30,5 +30,3 @@ jobs:
         with:
           github_token: ${{ secrets.BLOG }}
           publish_dir: ./public
-        env:
-          BRANCH: master
