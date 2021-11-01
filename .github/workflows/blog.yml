@@ -21,12 +21,11 @@ jobs:
           key: ${{ runner.OS }}-npm-cache
           restore-keys: |
             ${{ runner.OS }}-npm-cache
-      - name: Install Dependencies
-        run: npm install
       - name: Build
-        run: npm run build
-      - name: Cat
-        run: cat public/index.html
+          run: |
+                npm i
+                npm install hexo-cli -g
+                hexo clean && hexo generate
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
