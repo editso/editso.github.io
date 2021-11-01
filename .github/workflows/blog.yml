@@ -6,29 +6,26 @@ on:
       - hexo  # default branch
 
 jobs:
-  pages:
-    runs-on: ubuntu-latest
+  build: # job1 id
+    runs-on: ubuntu-latest # 运行环境为最新版 Ubuntu
+    name: auto deploy
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - name: Cache NPM dependencies
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-npm-cache
-          restore-keys: |
-            ${{ runner.OS }}-npm-cache
-      - name: Build
-          run: |
-              npm i
-              npm install hexo-cli -g
-              hexo clean && hexo generate
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.BLOG }}
-          publish_dir: ./public
-          publish_branch: master  # deploying branch
+    - name: Checkout # step1 获取源码
+      uses: actions/checkout@v1 # 使用 actions/checkout@v1
+      with: # 条件
+        submodules: true # Checkout private submodules(themes or something else). 当有子模块时切换分支？
+    - name: Setup Node.js 10.x
+      uses: actions/setup-node@master
+      with:
+        node-version: "10.x"
+    - name: Generate Public Files
+      run: |
+        npm i
+        npm install hexo-cli -g
+        hexo clean && hexo generate
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.BLOG }}
+        publish_dir: ./public
+        publish_branch: master  # deploying branch
