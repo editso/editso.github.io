@@ -1,9 +1,7 @@
-name: Pages
+name: auto deploy
 
 on:
-  push:
-    branches:
-      - hexo  # default branch
+  [push] # 触发事件
 
 jobs:
   build: # job1 id
@@ -23,9 +21,14 @@ jobs:
         npm i
         npm install hexo-cli -g
         hexo clean && hexo generate
-    - name: Deploy
+    # Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.BLOG }}
+        deploy_key: ${{ secrets.BLOG }}
+        external_repository: editso/editso.github.io
+        publish_branch: master
         publish_dir: ./public
-        publish_branch: master  # deploying branch
+        commit_message: ${{ github.event.head_commit.message }}
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
