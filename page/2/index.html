@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>editso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="永远相信美好的事情即将到来">
+<meta property="og:type" content="website">
+<meta property="og:title" content="editso">
+<meta property="og:url" content="http://editso.github.io/page/2/index.html">
+<meta property="og:site_name" content="editso">
+<meta property="og:description" content="永远相信美好的事情即将到来">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="zy">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="editso" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">editso</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://editso.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-vue-log" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/19/vue-log/" class="article-date">
+  <time datetime="2019-12-19T11:07:51.000Z" itemprop="datePublished">2019-12-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/vue-log/">记录一次使用vue-cli4.0 创建项目时非常慢问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="记录一次使用vue-cli4-0-创建项目时非常慢问题"><a href="#记录一次使用vue-cli4-0-创建项目时非常慢问题" class="headerlink" title="记录一次使用vue-cli4.0 创建项目时非常慢问题"></a>记录一次使用vue-cli4.0 创建项目时非常慢问题</h1><p>使用<code>vue</code>时在创建项目遇到创建项目非常慢<br>然后各种办法都不行, 最后问了我朋友,朋友告诉我是我的<code>npm node vue</code>版本过低<br>当时想只需要更新<code>npm vue</code>版本就行后还是下载很慢,最后将<code>node</code>更新故问题解决</p>
+<h3 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤:"></a>解决步骤:</h3><ul>
+<li>更新 <code>npm</code>: <code>npm install npm@latest -g</code>  </li>
+<li>安装 <code>n</code>: <code>npm install -g n --force</code></li>
+<li>更新 <code>node</code>: <code>sudo n stable</code></li>
+<li>下载最新 <code>vue</code>: <code>sudo npm install -g @vue/cli</code><br>更新好后重启终端问题解决!  </li>
+</ul>
+<h3 id="命令整合"><a href="#命令整合" class="headerlink" title="命令整合:"></a>命令整合:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install npm@latest -g  </span><br><span class="line">npm install -g n --force  </span><br><span class="line">sudo n stable </span><br><span class="line">sudo npm install -g @vue/cli </span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://editso.github.io/2019/12/19/vue-log/" data-id="ckvgoguqq003c8znf4p03gks4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/" rel="tag">踩坑记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mysql-log" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/19/mysql-log/" class="article-date">
+  <time datetime="2019-12-19T10:53:06.000Z" itemprop="datePublished">2019-12-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/mysql-log/">mysql8.0踩坑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Mysql8-0采坑"><a href="#Mysql8-0采坑" class="headerlink" title="Mysql8.0采坑"></a>Mysql8.0采坑</h1><h2 id="密码无法使用"><a href="#密码无法使用" class="headerlink" title="密码无法使用"></a>密码无法使用</h2><p>在服务器中安装<code>mysql8.0</code>数据库修改密码发现无法使用<code>update</code>语句修改,于是百度了一番参考了<a target="_blank" rel="noopener" href="https://blog.csdn.net/yi247630676/article/details/80352655">MYSQL8.0以上版本正确修改ROOT密码</a>由此问题解决  </p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法:"></a>解决方法:</h3><ol>
+<li>使用<code>mysql</code>初始生成的密码登录到数据库(密码在数据库产生的日志文件中, 可查看/<code>etc/my.cnf</code>中的<code>log-error</code>指向的文件)  </li>
+<li>登录到数据库 <code>mysql -uroot -p&#39;首次初始化数据库产生的密码&#39;</code>  </li>
+<li>登录执行 <code>alter user &#39;root&#39;@localhost identified by &#39;new password&#39;;</code> </li>
+<li>执行成功后刷新数据库 <code>flush privileges;</code>问题成功解决  </li>
+</ol>
+<h2 id="连接出现-cryptography-is-required-for-sha256-password-or-caching-sha2-password"><a href="#连接出现-cryptography-is-required-for-sha256-password-or-caching-sha2-password" class="headerlink" title="连接出现 cryptography is required for sha256_password or caching_sha2_password**"></a>连接出现 <code>cryptography is required for sha256_password or caching_sha2_password</code>**</h2><h3 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法:"></a>解决方法:</h3><ol>
+<li><p>首先查询一下数据库<code>user</code>表中<code>连接时报错的用户与主机</code>  </p>
+<pre><code> mysql&gt; select user,plugin,host  from mysql.user; 
+ +------------------+-----------------------+-----------+  
+ | user             | plugin                | host      |  
+ +------------------+-----------------------+-----------+  
+ | root             | mysql_native_password | %         |  
+ | mysql.infoschema | caching_sha2_password | localhost |  
+ | mysql.session    | caching_sha2_password | localhost |  
+ | mysql.sys        | caching_sha2_password | localhost |  
+ | root             | mysql_native_password | localhost |  
+ +------------------+-----------------------+-----------+  
+ 5 rows in set (0.00 sec)  
+</code></pre>
+</li>
+<li><p><code>%</code> 表示通配符</p>
+</li>
+<li><p>查询得出 <code>plugin </code>为 <code>caching_sha2_password</code> 就将它改为 <code>mysql_native_password</code>执行如下命令:<br>  <code>alter user &#39;your account&#39;@&#39;your host&#39; identified with mysql_native_password by &#39;your password&#39;</code></p>
+</li>
+<li><p><code>flush privileges</code> #刷新权限</p>
+</li>
+<li><p>重新连接， 问题解决 。参考了<code>msql8.0</code>官方文档<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/pluggable-authentication.html">可插拔身份验证</a></p>
+</li>
+</ol>
+<h3 id="不成功其他解决方法"><a href="#不成功其他解决方法" class="headerlink" title="不成功其他解决方法"></a>不成功其他解决方法</h3><ol>
+<li>参考 <a target="_blank" rel="noopener" href="https://blog.csdn.net/p_xiaobai/article/details/85334875">mysql报错RuntimeError: cryptography is required for sha256_password or caching_sha2_p</a></li>
+<li><code>ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;password&#39; PASSWORD EXPIRE NEVER;</code> #修改加密规则  </li>
+<li><code> ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED WITH mysql_native_password BY &#39;password&#39;;</code> #更新一下用户的密码 </li>
+<li><code>FLUSH PRIVILEGES;</code> #刷新权限</li>
+<li><code>alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;</code>  # 再次重置密码</li>
+<li>重启服务,问题解决 </li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://editso.github.io/2019/12/19/mysql-log/" data-id="ckvgogup3000l8znf3gygbyot" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/" rel="tag">踩坑记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ssh-log" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/19/ssh-log/" class="article-date">
+  <time datetime="2019-12-19T10:32:57.000Z" itemprop="datePublished">2019-12-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/ssh-log/">记录一次服务器免密登录失效问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SSH免密登陆失效"><a href="#SSH免密登陆失效" class="headerlink" title="SSH免密登陆失效"></a>SSH免密登陆失效</h1><p>在本地使用<code>ssh-keygen</code>生成密钥  </p>
+<blockquote>
+<p><code>ssh-keygen -t rsa</code></p>
+</blockquote>
+<p>将本地<code>~/.ssh/id_rsa.pub</code>使用<code>ssh-copy-id</code>复制到<code>user@hostname</code>下  </p>
+<blockquote>
+<p><code>ssh-copy-id -i ~/.ssh/id_rsa.pub user@hostname</code></p>
+</blockquote>
+<p>成功后我尝试使用<code>ssh user@hostname</code>连接发现还是需要输入密码</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>服务端<code>~/.ssh</code>文件夹权限必须是 <strong><code>700</code></strong>  </p>
+<blockquote>
+<p><code>chmod 700 ~/.ssh</code>  </p>
+</blockquote>
+<p>服务端<code>~/.ssh/authorized_keys</code>权限必须是 <strong><code>600</code></strong>  </p>
+<blockquote>
+<p><code>chmod 600 ~/.ssh/autohrized_keys</code>  </p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://editso.github.io/2019/12/19/ssh-log/" data-id="ckvgogup4000n8znf18ybf95b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/" rel="tag">踩坑记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-func-use" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/01/linux-func-use/" class="article-date">
+  <time datetime="2019-12-01T18:57:27.000Z" itemprop="datePublished">2019-12-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/01/linux-func-use/">linux系统函数学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux系统函数学习"><a href="#Linux系统函数学习" class="headerlink" title="Linux系统函数学习"></a>Linux系统函数学习</h1><h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p><code>程序</code>: 死的, 只会占用磁盘空间<br><code>进程</code>: 活的,运行起来的程序,占用内存,cpu系统资源等  </p>
+<h2 id="PCB进程控制块"><a href="#PCB进程控制块" class="headerlink" title="PCB进程控制块"></a>PCB进程控制块</h2><p>就是一个结构体</p>
+<blockquote>
+<p>相关信息: </p>
+</blockquote>
+<ul>
+<li> 进程id, 文件描述符, 进程工作目录, *umask掩码, 信号相关信息资源, 用户id和组id,  </li>
+<li>进程状态: 初始态, 就绪态, 运行态, 挂起态, 终止态  </li>
+</ul>
+<h2 id="fork-函数"><a href="#fork-函数" class="headerlink" title="fork()函数"></a><code>fork()</code>函数</h2><p>创建子进程, 父进程各自返回.父进程返回子进程<code>pid</code>, 子进程返回<code>0</code><br>头文件:<code>unistd.h</code>  </p>
+<ul>
+<li><p>父子进程相同:<br>刚fork后:  data段, text段, 堆, 栈, 环境变量, 宿主目录位置, 进程工作位置, 信号处理方式  </p>
+</li>
+<li><p>父子进程不同:<br>进程id, 返回值, 各自的父进程, 进程创建时间, 闹钟, 未决信号集  </p>
+</li>
+<li><p>父子进程共享:<br>读时共享,写时复制<br>文件描述符, mmap映射区  </p>
+</li>
+<li><p>获取进程各个<code>id</code>函数:<br><code>getpid()</code>:获取当前进程<code>id</code><br><code>getppid()</code>:获取父进程的<code>id</code><br><code>getgid()</code>:获取当前组<code>id</code></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://editso.github.io/2019/12/01/linux-func-use/" data-id="ckvgoguoy000e8znfd90j576t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-makefile-use" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/28/makefile-use/" class="article-date">
+  <time datetime="2019-11-28T11:01:00.000Z" itemprop="datePublished">2019-11-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/28/makefile-use/">makefile文件的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="makefile文件的使用"><a href="#makefile文件的使用" class="headerlink" title="makefile文件的使用"></a>makefile文件的使用</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>makefile</code>是一个脚本文件，将命令整合到一起来执行，提高开发效率<br>使用它脚本名如果不指定<code>-f</code>参数那么脚本文件命名必须要使用 <em><code>makefile</code> or <code>Makefile</code></em></p>
+<h2 id="一个规则"><a href="#一个规则" class="headerlink" title="一个规则"></a>一个规则</h2><p>生成目标:生成目标对应的依赖<br>++++执行语句<br><em>注意:生成语句必须是换行后缩进<code>4</code>个空格</em></p>
+<h2 id="两个函数"><a href="#两个函数" class="headerlink" title="两个函数*"></a>两个函数*</h2><p>函数调用方法:<code>$(函数名 args1, args2)</code><br><code>$(wildcard pattern)</code>:获取所有匹配的内容，返回一个列表<br><code>$(patsubst %, %,  p3)</code>:获取某个列表中的所有值,并将参数1匹配到替换为参数二</p>
+<h2 id="三个变量"><a href="#三个变量" class="headerlink" title="三个变量"></a>三个变量</h2><p><code>$^</code>:获取一个规则中所有的依赖<br><code>$@</code>:获取一个规则中生成的目标<br><code>$&lt;</code>:获取一个规则中第一个依赖,它还有一个特性就是在使用规则匹配时有多个依赖可以将他们都拆分开  </p>
+<h2 id="静态-规则匹配"><a href="#静态-规则匹配" class="headerlink" title="[静态]规则匹配"></a>[静态]规则匹配</h2><p><code>%:%</code>:匹配任意的规则<br>如: <code>%.c:%.o</code>表示匹配目标后缀为<code>.c</code>的以应依赖为<code>.o</code>的<br><code>$(目标依赖文件)</code> or <code>t1,12....:%:%</code>:在执行规则时,在执行到目标依赖文件时才会执行到该语句<br>例如:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 规则</span><br><span class="line">src = $(wildcard *.c)</span><br><span class="line">obj = $(patsubst %.c, %.o, $(src))</span><br><span class="line">a.out:$(obj)</span><br><span class="line">    gcc $(obj) -o $@</span><br><span class="line"></span><br><span class="line">$(obj):%.o:%c</span><br><span class="line">    gcc $&lt; -0 $@</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><code>all</code>:表示执行的最终目标<br>不是用它默认是第一条就是最终目标<br><code>clean</code>:执行清理语句在执行的时候使用<code>make clean -n</code>来显示出要被清理文件执行直接去掉<code>-n</code><br><code>make -f</code>:表示指定要执行的<code>makefile</code>, 如果指定了它要执行<code>clean</code>就需要用<code>make -f 指定的makefile clean</code> 来执行</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://editso.github.io/2019/11/28/makefile-use/" data-id="ckvgoguoz000g8znf2wy2hg6f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Make/" rel="tag">Make</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-gdb-use" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/gdb-use/" class="article-date">
+  <time datetime="2019-11-27T21:48:14.000Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/gdb-use/">gdb调试工具的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="gdb调试工具的使用"><a href="#gdb调试工具的使用" class="headerlink" title="gdb调试工具的使用"></a>gdb调试工具的使用</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>简单地说就是一个调试工具。它是一个受通用公共许可证即GPL保护的自由软件。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用gdb调试工具时，在gcc打包为二进制文件时需要指定<code>-g</code>参数表示在该程序中添加调试语句<br>当编译好后，执行<code>gdb 需要被调试的程序</code>  </p>
+<h2 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h2><ul>
+<li><p><code>list</code> / <code>l</code><br>列出被调试程序的源代码，根据源码向指定位置设置断点<br>显示出源代码的下一页使用 <code>list / l</code></p>
+</li>
+<li><p><code>break</code> / <code>b</code><br>设置断点：<code>break / b 行号</code><br>设置条件断点：<code>b 行号 if 条件</code>当满足条件时才会执行，一般用在循环/递归语句</p>
+</li>
+<li><p><code>run</code> / <code>r</code><br>运行程序<br>不用设置断点直接执行，如果遇到程序出现错误时会显示出错的行数,可快速找到错误<br>该命令还可以在后面添加参数，每个参数以空格分开，它表示向<code>main</code>函数中传入参数</p>
+</li>
+<li><p><code>n</code> (next) / <code>S</code> (step)<br><code>n</code>/<code>S</code> 表示执行下一条指令<br>它们的区别在于执行函数的时候，当使用<code>n</code>来执行的时候会直接越过函数不会进入到函数内部执行而是直接执行到下一行,而<code>S</code>则反之<br>在调试时可以按需选择如何使用这两个命令<br>gbd调试时有一个小毛病就是在进入到函数内部时如果是库函数就会报<code>找不到那个文件</code>所以在使用时要注意执行遇到库函数时要使用<code>n</code>来执行</p>
+</li>
+<li><p><code>p</code><br>显示指定变量的值<code>p 变量名</code></p>
+</li>
+<li><p><code>continue</code><br>继续执行断点后续指令</p>
+</li>
+<li><p><code>quit</code><br>退出当前调试</p>
+</li>
+<li><p><code>finish</code><br>结束当前函数调用，回到调用点</p>
+</li>
+<li><p><code>set args</code><br><code>set args args1 args2 ..</code><br>在执行程序前设置命令行参数:</p>
+</li>
+<li><p><code>info b</code><br>查看<code>gdb</code>调试表中调试的内容</p>
+</li>
+<li><p><code>ptype</code><br>查看变量类型：<code>ptype 变量</code></p>
+</li>
+<li><p><code>bt</code>(backtrace)<br>列出当前程序正存活着的栈帧<br>它通常与<code>frame</code>配合使用</p>
+</li>
+<li><p><code>frame</code><br>根据栈帧编号，切换栈桢<br>它通常与<code>bt</code>配合使用</p>
+</li>
+<li><p><code>set follow-fork-mode [child | parent]</code>    </p>
+<ul>
+<li><code>child</code>: 跟踪子进程  </li>
+<li><code>parent</code>: 跟踪父进程  </li>
+</ul>
+</li>
+<li><p><code>display</code> &amp; <code>undisplay</code>   </p>
+<ul>
+<li><code>display</code>: 设置跟踪变量</li>
+<li><code>undisplay</code>[编号]: 取消跟踪变量</li>
+</ul>
+</li>
+</ul>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>栈帧: 随着函数调用而在<code>stack</code>上开辟的一片内存空间, 用于存放函数调用时产生的局部变量和临时值  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://editso.github.io/2019/11/27/gdb-use/" data-id="ckvgoguop00088znf6liiacb9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GDB/" rel="tag">GDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vim-use" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/vim-use/" class="article-date">
+  <time datetime="2019-11-27T16:30:34.000Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/vim-use/">vim编辑器使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="vim-学习笔记"><a href="#vim-学习笔记" class="headerlink" title="vim 学习笔记"></a><code>vim</code> 学习笔记</h1><h2 id="vim三种模式"><a href="#vim三种模式" class="headerlink" title="vim三种模式"></a>vim三种模式</h2><ul>
+<li>命令模式</li>
+<li>末行模式</li>
+<li>输入模式</li>
+</ul>
+<h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><ul>
+<li>当刚刚启动vim时就为该模式<code>命令模式</code></li>
+<li>该模式下所敲击的键盘都为命令</li>
+<li>若想切换到<code>输入模式</code>可敲击字母按键 <code>i</code></li>
+<li>若想切换到<code>末行默认</code>输入键盘中冒号 <code>:</code></li>
+</ul>
+<h3 id="命令模式相关命令"><a href="#命令模式相关命令" class="headerlink" title="命令模式相关命令"></a>命令模式相关命令</h3><p><code>i</code>: 在光标之前插入数据</p>
+<p><code>I</code>: 光标所在行的行首插入数据</p>
+<p><code>a</code>: 在光标之后插入数据</p>
+<p><code>A</code>: 光标所在行的行尾插入数据</p>
+<p><code>o</code>: 在光标所在行的下一行插入数据</p>
+<p><code>O</code>: 光标所在行的上一行数据插入数据</p>
+<p><code>s</code>: 向光标所在的那个字符插入数据并删除光标所指向的字符</p>
+<p><code>S</code>: 向光标所在行插入数据并删除当前行所有数据</p>
+<p><code>h</code> <code>j</code> <code>k</code> <code>l</code>: 分别代表 <code>左</code>/<code>下</code>/<code>上</code>/<code>右</code>移动</p>
+<p><code>M</code>: 光标移动到中间行</p>
+<p><code>L</code>: 光标移动到屏幕最后一行</p>
+<p><code>G</code>: 跳转到指定行 <code>行号G</code>:<br>例如：移动到第二行<code>2G</code></p>
+<p><code>gg</code>: 跳转到首行</p>
+<p><code>GG</code>: 跳转到最后一行</p>
+<p><code>gg=G</code>: 自动格式化文本</p>
+<p><code>%</code>: 括号匹配</p>
+<p><code>x</code>: 删除光标下的字符</p>
+<p><code>dw</code>: 删除单词</p>
+<p><code>D</code>: 删除光标到行尾的所有字符</p>
+<p><code>0</code>: 光标移动到行首</p>
+<p><code>$</code>: 光标移动到行尾</p>
+<p><code>d0</code>: 删除光标到行首的所有字符</p>
+<p><code>d$</code>: 删除光标到行尾的所有字符</p>
+<p><code>r</code>: 替换光标下的字符</p>
+<p><code>v</code>: 可视, 选中某区域使用 <code>h j k l</code>来移动选中区域</p>
+<p><code>数字dd</code>: 删除n行</p>
+<p><code>yy</code>: 复制一行</p>
+<p><code>p</code>: 粘贴到光标下一行</p>
+<p><code>P</code>: 粘贴到光标上一行</p>
+<p>[数字]<code>yy</code>: 复制多行</p>
+<p><code>u</code>  <code>ctr+r</code>: 撤销上一步<code>u</code>, 反撤销<code>ctr+r</code></p>
+<p><code>/</code>: 查找<code>/查找的内容</code>  </p>
+<ul>
+<li>按<code>n</code>查找下一个  </li>
+<li>按<code>N</code>查找上一个</li>
+</ul>
+<p><code>*</code>  <code>#</code>: 查找已知内容, 将光标移动到需要被查找的字符按  </p>
+<ul>
+<li><code>*</code>向后查找  </li>
+<li><code>#</code>向前查找</li>
+</ul>
+<p><code>[d</code>: 查看宏定义（前提是该宏存在）</p>
+<h2 id="末行模式"><a href="#末行模式" class="headerlink" title="末行模式"></a>末行模式</h2><p>按<code>esc</code>输入<code>:</code>进入末行模式</p>
+<p><code>数字</code>: 跳转到指定的行<br>例如: 跳转到22行<code>:22</code></p>
+<p><code>s /old/new</code>| <code>%s /old/new</code>| <code>%s /old/new/g</code>| <code>数字,数字s /old/new</code>  </p>
+<ul>
+<li>单行替换 将光标移动到需要被替换的行<code>:s /被替换的/替换后的</code>  </li>
+<li>全文替换 <code>:%s /被替换的/替换后的</code> 只会替换每行的第一个被匹配的  </li>
+<li>全文整行替换<code>:%s /被替换的/替换后的/g</code> 全文替换如一行多个匹配都会被替换  </li>
+<li>区域替换<code>:开始行,结束行s /被替换的/替换后的</code> 替换指定区域中匹配的  </li>
+</ul>
+<p><code>sp</code> <code>vsp</code>: 分割窗口  </p>
+<ul>
+<li>垂直分割: <code>sp</code>  </li>
+<li>水平分割: <code>vsp</code>  </li>
+<li>切换页面: <code>ctr + ww</code>  </li>
+<li>退出光标所在页面: <code>q</code>  </li>
+<li>退出所有页面: <code>qall</code></li>
+</ul>
+<p><code>ctr+p</code>|<code>ctr+n</code>:  </p>
+<ul>
+<li>上一个命令<code>ctr+p</code></li>
+<li>下一个命令<code>ctr+n</code></li>
+</ul>
+<p><code>w</code>: 保存不退出vim</p>
+<p><code>qw</code>: 保存并退出</p>
+<p><code>q!</code>: 不保存退出</p>
+<p><code>!</code>: 不保存执行命令</p>
+<ul>
+<li><code>:!</code>[执行的命令]</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://editso.github.io/2019/11/27/vim-use/" data-id="ckvgogup6000p8znfbars5gto" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Editor/" rel="tag">Editor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-kmp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/kmp/" class="article-date">
+  <time datetime="2019-11-27T15:50:04.000Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/kmp/">字符串匹配算法-KMP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="字符串匹配算法-KMP"><a href="#字符串匹配算法-KMP" class="headerlink" title="字符串匹配算法-KMP"></a>字符串匹配算法-KMP</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>kmp的一些概述不做解释了, 请参考:  <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/kmp%E7%AE%97%E6%B3%95/10951804?fr=aladdin">kmp算法</a> (百度百科)<br>参考了 <code>阮一峰</code>的: <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">字符串匹配的KMP算法</a><br>使用 <code>C</code> 语言实现的算法  </p>
+<h2 id="部分匹配表"><a href="#部分匹配表" class="headerlink" title="部分匹配表"></a>部分匹配表</h2><p>指在一串字符串中, 前缀与后缀中所共有的字符  </p>
+<ul>
+<li>前缀: 不包含字符串最后一个字符  </li>
+<li>后缀: 不包含字符串第一个字符  </li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:</h3><p>字符串 (<code>AHABAD</code>)**<br>由此得出他们的部分匹配表为  </p>
+<p><strong><code>A -&gt; 0</code></strong><br>    前后都没有所有共有字符数所以为 0  </p>
+<p><strong><code>AH -&gt; 0</code></strong><br>    前缀: <code>A</code><br>    后缀: <code>H</code><br>    它们没有功能字符所有为 <code>0</code>  </p>
+<p><strong><code>AHA -&gt; 1</code></strong><br>    前缀: <code>A, AH</code><br>    后缀: <code>A, HA</code><br>    它们有共有的字符 共有数为 <code>1</code>  </p>
+<p><strong><code>AHAB -&gt; 0</code></strong><br>    前缀: <code>A, AH, AHA</code><br>    后缀: <code>B, AB, HAB</code><br>    它们没有共有字符所有为 <code>0</code>  </p>
+<p><strong><code>AHABA -&gt; 1</code></strong><br>    前缀: <code>A, AH, AHA, AHAB</code><br>    后缀: <code>A, BA, ABA, HABA</code><br>    它们有共有字符 共有数为 <code>1</code>  </p>
+<blockquote>
+<p>由此得出 <code>AHABAD</code> 的前缀表为</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center">A</td>
+<td align="center">H</td>
+<td align="center">A</td>
+<td align="center">B</td>
+<td align="center">A</td>
+<td align="center">D</td>
+</tr>
+<tr>
+<td align="center">-1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>部分匹配表算法实现过程 <code>C 语言</code>  </p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">int* prefix(char* s)&#123;</span><br><span class="line">    /*</span><br><span class="line">        接收一个字符串,</span><br><span class="line">        返回一个部分匹配表  </span><br><span class="line">    */</span><br><span class="line"></span><br><span class="line">    int len = strlen(s),</span><br><span class="line">        i = 0,</span><br><span class="line">        j = -1, </span><br><span class="line"></span><br><span class="line">        *p = malloc(sizeof(int) * len);</span><br><span class="line"></span><br><span class="line">    p[0] = -1;</span><br><span class="line"></span><br><span class="line">    while(i &lt; len - 1)&#123;</span><br><span class="line">        if(j == -1 || s[i] == s[j])&#123;</span><br><span class="line">            p[++i] = ++j;</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line">        j = p[j];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>变量 <code>i</code> &amp;&amp; <code>j</code> &amp;&amp; <code>p</code> 的作用</strong><br>    在这里 <code>p</code> 可以看作是一次回溯,<br>    应为每当 if 条件不满足时 则进行一次回溯<br>    那么此时 j 的位置就需要重置到 p[j]</p>
+<blockquote>
+<p>部分匹配表生成过程 以字符串 <code>AHABAD</code> 为例</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">变量</th>
+<th align="center">A</th>
+<th align="center">H</th>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">A</th>
+<th align="center">D</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">s = AHABAD</td>
+<td align="center">\</td>
+<td align="center">A</td>
+<td align="center">A</td>
+<td align="center">H</td>
+<td align="center">A</td>
+<td align="center">\</td>
+</tr>
+<tr>
+<td align="center">j = -1</td>
+<td align="center">-1, 0</td>
+<td align="center">0,-1, 0</td>
+<td align="center">0, 1</td>
+<td align="center">1, 0, -1, 0</td>
+<td align="center">0, 1</td>
+<td align="center">\</td>
+</tr>
+<tr>
+<td align="center">i = 0</td>
+<td align="center">0, 1</td>
+<td align="center">1, 2</td>
+<td align="center">2, 3</td>
+<td align="center">3, 4</td>
+<td align="center">4, 5</td>
+<td align="center">\</td>
+</tr>
+<tr>
+<td align="center">p[0]=-1</td>
+<td align="center">p[1]=0</td>
+<td align="center">p[2]= 0</td>
+<td align="center">p[3]=1</td>
+<td align="center">p[4]=0</td>
+<td align="center">p[5]=1</td>
+<td align="center">\</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>kmp</strong>  </p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//kmp匹配算法</span><br><span class="line">int kmpSearch(char *t, char *s)&#123;</span><br><span class="line">    int t_len = strlen(t), </span><br><span class="line">        s_len = strlen(s);</span><br><span class="line"></span><br><span class="line">    int *p = prefix(s), </span><br><span class="line">        m = 0, //代表母串匹配到的位置</span><br><span class="line">        j = 0; // 代表字符匹配到的位置</span><br><span class="line"></span><br><span class="line">    while(t_len &gt; m &amp;&amp; s_len &gt; j)&#123;</span><br><span class="line">        //j == -1 那么代表不和任何匹配直接向后移动以为</span><br><span class="line">        if(j == -1 ||  t[m] == s[j])&#123;</span><br><span class="line">            m++;</span><br><span class="line">            j++;</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line">        //当不相等时, 就去查询部分匹配表</span><br><span class="line">        j = p[j];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (j == s_len)</span><br><span class="line">        //返回匹配到的索引位置</span><br><span class="line">        return m - j;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><p>所需头文件:  </p>
+<blockquote>
+<p><code>string.h stdlib.h</code>  </p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">//部分匹配表算法</span><br><span class="line">int* prefix(char* s)&#123;</span><br><span class="line">    //prefix table</span><br><span class="line">    int len = strlen(s),</span><br><span class="line">        i = 0,</span><br><span class="line">        j = -1,</span><br><span class="line">        *p = malloc(sizeof(int) * len);</span><br><span class="line">    p[0] = -1;</span><br><span class="line"></span><br><span class="line">    while(i &lt; len - 1)&#123;</span><br><span class="line">        if(j == -1 || s[i] == s[j])&#123;</span><br><span class="line">            p[++i] = ++j;</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line">        j = p[j];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//kmp</span><br><span class="line">int kmpSearch(char *t, char *s)&#123;</span><br><span class="line">    int t_len = strlen(t), </span><br><span class="line">        s_len = strlen(s);</span><br><span class="line"></span><br><span class="line">    int *p = prefix(s), </span><br><span class="line">        m = 0,</span><br><span class="line">        j = 0;</span><br><span class="line"></span><br><span class="line">    while(t_len &gt; m &amp;&amp; s_len &gt; j)&#123;</span><br><span class="line">        if(j == -1 ||  t[m] == s[j])&#123;</span><br><span class="line">            m++;</span><br><span class="line">            j++;</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line">        j = p[j];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (j == s_len)</span><br><span class="line">        return m - j;</span><br><span class="line">    return -1;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://editso.github.io/2019/11/27/kmp/" data-id="ckvgoguow000c8znfefwebmgb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Code/" rel="tag">Code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-gcc-use" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/gcc-use/" class="article-date">
+  <time datetime="2019-11-27T14:52:16.000Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/gcc-use/">GCC 常见命令参数的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="GCC-常见命令参数的使用"><a href="#GCC-常见命令参数的使用" class="headerlink" title="GCC 常见命令参数的使用"></a>GCC 常见命令参数的使用</h1><h2 id="相关参数"><a href="#相关参数" class="headerlink" title="相关参数"></a>相关参数</h2><ul>
+<li><code>-v</code><br>  查看版本号</li>
+<li><code>-I (大写)</code><br>  指定头文件目录, 该命令随后就是目录没有空格</li>
+<li><code>-c</code><br>  只做生成.o文件(预处理-&gt;编译-&gt;汇编) 不做链接</li>
+<li><code>-E</code><br>  生成预处理文件  </li>
+<li><code>-S</code><br>  检查语法,生成汇编文件(预处理-&gt;编译)</li>
+<li><code>-D</code><br>  在编译时定义宏</li>
+<li><code>-g</code><br>  编译时添加调试语句</li>
+<li><code>-Wall</code><br>  显示所有调试信息</li>
+<li><code>-On （n = 1~3）</code><br>  编译优化 值越大优化得越多</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://editso.github.io/2019/11/27/gcc-use/" data-id="ckvgoguon00068znfedppbtwk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GCC/" rel="tag">GCC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git-use" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/31/git-use/" class="article-date">
+  <time datetime="2019-07-31T09:10:00.000Z" itemprop="datePublished">2019-07-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/31/git-use/">GIT仓库的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="GIT仓库的使用"><a href="#GIT仓库的使用" class="headerlink" title="GIT仓库的使用"></a>GIT仓库的使用</h1><h2 id="配置基本信息"><a href="#配置基本信息" class="headerlink" title="配置基本信息"></a>配置基本信息</h2><ul>
+<li><code>git config --global user.name &quot;用户名&quot;</code>  </li>
+<li><code>git config --global user.email &quot;邮箱&quot;</code></li>
+</ul>
+<h2 id="克隆分支"><a href="#克隆分支" class="headerlink" title="克隆分支"></a>克隆分支</h2><ul>
+<li><code>git clone xxxxxx.git</code></li>
+</ul>
+<h2 id="同步分支"><a href="#同步分支" class="headerlink" title="同步分支"></a>同步分支</h2><ul>
+<li><code>git clone xxxxxx.git - b 分支名</code></li>
+</ul>
+<h2 id="上传提交信息"><a href="#上传提交信息" class="headerlink" title="上传提交信息"></a>上传提交信息</h2><ul>
+<li><code>git commit  -m  &quot;提交信息&quot;</code></li>
+</ul>
+<h2 id="将本地的库链接到仓库"><a href="#将本地的库链接到仓库" class="headerlink" title="将本地的库链接到仓库"></a>将本地的库链接到仓库</h2><ul>
+<li><code>git remote add origin xxxxx.git</code></li>
+</ul>
+<h2 id="查看代码的修改状态"><a href="#查看代码的修改状态" class="headerlink" title="查看代码的修改状态"></a>查看代码的修改状态</h2><ul>
+<li><code>git status</code></li>
+</ul>
+<h2 id="红色或绿色部分字体是工程内的发生修改的状态标识"><a href="#红色或绿色部分字体是工程内的发生修改的状态标识" class="headerlink" title="红色或绿色部分字体是工程内的发生修改的状态标识"></a>红色或绿色部分字体是工程内的发生修改的状态标识</h2><ul>
+<li><code>modified</code> 代表文件和上一版本相比，有过修改  </li>
+<li><code>new file</code>  代表文件是新增加的  </li>
+<li><code>deleted</code>   代表文件被删除了，提交成功后，文件将从repository中删除  </li>
+<li><code>untracked file</code> 一般都是新增加的文件夹</li>
+</ul>
+<h2 id="查看代码的修改内容"><a href="#查看代码的修改内容" class="headerlink" title="查看代码的修改内容"></a>查看代码的修改内容</h2><ul>
+<li><code>git diff &lt;filename&gt;</code></li>
+</ul>
+<h2 id="添加一个文件"><a href="#添加一个文件" class="headerlink" title="添加一个文件"></a>添加一个文件</h2><ul>
+<li><code>git add &lt;filename&gt;</code></li>
+</ul>
+<h2 id="删除一个不需要的文件"><a href="#删除一个不需要的文件" class="headerlink" title="删除一个不需要的文件"></a>删除一个不需要的文件</h2><ul>
+<li><code>git rm &lt;filename&gt;</code></li>
+</ul>
+<h2 id="增加全部需要上传的文件"><a href="#增加全部需要上传的文件" class="headerlink" title="增加全部需要上传的文件"></a>增加全部需要上传的文件</h2><ul>
+<li><code>git add --all</code></li>
+<li><code>git add -A</code></li>
+<li><code>git add .</code></li>
+</ul>
+<h2 id="如果发现有文件漏提或注释有误，使用amend修正"><a href="#如果发现有文件漏提或注释有误，使用amend修正" class="headerlink" title="如果发现有文件漏提或注释有误，使用amend修正"></a>如果发现有文件漏提或注释有误，使用<code>amend</code>修正</h2><ul>
+<li><code>git commit --amend</code><br>  注意：使用commit命令只是将修改提交到本地仓库</li>
+</ul>
+<h2 id="同步到服务器前先需要将服务器代码同步到本地"><a href="#同步到服务器前先需要将服务器代码同步到本地" class="headerlink" title="同步到服务器前先需要将服务器代码同步到本地"></a>同步到服务器前先需要将服务器代码同步到本地</h2><ul>
+<li><code>git pull</code><br>  如果执行失败，就按照提示还原有冲突的文件，然后再次尝试同步<br>  <code>git checkout -- &lt;有冲突的文件路径&gt;</code></li>
+</ul>
+<h2 id="同步到服务器"><a href="#同步到服务器" class="headerlink" title="同步到服务器"></a>同步到服务器</h2><ul>
+<li><code>git push origin  &lt;本地分支名&gt;</code><br>  如果执行失败，一般是没有将服务器代码同步到本地导致的，先执行上面的<code>git pull</code>命令。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://editso.github.io/2019/07/31/git-use/" data-id="ckvgoguoq00098znffecwdp6h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/" rel="tag">GIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%93%E5%BA%93/" rel="tag">仓库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Acm/" rel="tag">Acm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CPP/" rel="tag">CPP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/" rel="tag">Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Desktop/" rel="tag">Desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editor/" rel="tag">Editor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCC/" rel="tag">GCC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/" rel="tag">GDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/" rel="tag">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GRUB/" rel="tag">GRUB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kde/" rel="tag">Kde</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Make/" rel="tag">Make</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theme/" rel="tag">Theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VirtualBox/" rel="tag">VirtualBox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%93%E5%BA%93/" rel="tag">仓库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A3%81%E7%BA%B8/" rel="tag">壁纸</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F/" rel="tag">系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91/" rel="tag">踩坑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/" rel="tag">踩坑记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Acm/" style="font-size: 10px;">Acm</a> <a href="/tags/Algorithm/" style="font-size: 11.67px;">Algorithm</a> <a href="/tags/C/" style="font-size: 16.67px;">C</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Code/" style="font-size: 10px;">Code</a> <a href="/tags/Desktop/" style="font-size: 10px;">Desktop</a> <a href="/tags/Editor/" style="font-size: 10px;">Editor</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/GCC/" style="font-size: 11.67px;">GCC</a> <a href="/tags/GDB/" style="font-size: 10px;">GDB</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GRUB/" style="font-size: 10px;">GRUB</a> <a href="/tags/Kde/" style="font-size: 10px;">Kde</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Manjaro/" style="font-size: 10px;">Manjaro</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Theme/" style="font-size: 11.67px;">Theme</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VirtualBox/" style="font-size: 11.67px;">VirtualBox</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/%E4%BB%93%E5%BA%93/" style="font-size: 10px;">仓库</a> <a href="/tags/%E5%A3%81%E7%BA%B8/" style="font-size: 10px;">壁纸</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">学习笔记</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 20px;">日志</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">系统</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 11.67px;">编程</a> <a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 10px;">踩坑</a> <a href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 13.33px;">踩坑记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/21/c-01-log/">记一次C内存溢出问题</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/21/grub-log/">GRUB双系统找不到Windows问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/08/acm-01/">acm-士兵队列训练问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/03/c-log/">记录一次学习C++时编译失败出现(multiple definition of xxx first defined here collect2)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/30/virtualbox-log/">解决VirtualBox无法启用嵌套分页</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 zy<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

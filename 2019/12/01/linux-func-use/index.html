@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>linux系统函数学习 | editso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Linux系统函数学习进程程序: 死的, 只会占用磁盘空间进程: 活的,运行起来的程序,占用内存,cpu系统资源等   PCB进程控制块就是一个结构体  相关信息:     进程id, 文件描述符, 进程工作目录, *umask掩码, 信号相关信息资源, 用户id和组id,   进程状态: 初始态, 就绪态, 运行态, 挂起态, 终止态    fork()函数创建子进程, 父进程各自返回.父进程返">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux系统函数学习">
+<meta property="og:url" content="http://editso.github.io/2019/12/01/linux-func-use/index.html">
+<meta property="og:site_name" content="editso">
+<meta property="og:description" content="Linux系统函数学习进程程序: 死的, 只会占用磁盘空间进程: 活的,运行起来的程序,占用内存,cpu系统资源等   PCB进程控制块就是一个结构体  相关信息:     进程id, 文件描述符, 进程工作目录, *umask掩码, 信号相关信息资源, 用户id和组id,   进程状态: 初始态, 就绪态, 运行态, 挂起态, 终止态    fork()函数创建子进程, 父进程各自返回.父进程返">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-01T18:57:27.000Z">
+<meta property="article:modified_time" content="2021-11-01T13:08:02.878Z">
+<meta property="article:author" content="zy">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="editso" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">editso</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://editso.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-linux-func-use" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/01/linux-func-use/" class="article-date">
+  <time datetime="2019-12-01T18:57:27.000Z" itemprop="datePublished">2019-12-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux系统函数学习
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux系统函数学习"><a href="#Linux系统函数学习" class="headerlink" title="Linux系统函数学习"></a>Linux系统函数学习</h1><h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p><code>程序</code>: 死的, 只会占用磁盘空间<br><code>进程</code>: 活的,运行起来的程序,占用内存,cpu系统资源等  </p>
+<h2 id="PCB进程控制块"><a href="#PCB进程控制块" class="headerlink" title="PCB进程控制块"></a>PCB进程控制块</h2><p>就是一个结构体</p>
+<blockquote>
+<p>相关信息: </p>
+</blockquote>
+<ul>
+<li> 进程id, 文件描述符, 进程工作目录, *umask掩码, 信号相关信息资源, 用户id和组id,  </li>
+<li>进程状态: 初始态, 就绪态, 运行态, 挂起态, 终止态  </li>
+</ul>
+<h2 id="fork-函数"><a href="#fork-函数" class="headerlink" title="fork()函数"></a><code>fork()</code>函数</h2><p>创建子进程, 父进程各自返回.父进程返回子进程<code>pid</code>, 子进程返回<code>0</code><br>头文件:<code>unistd.h</code>  </p>
+<ul>
+<li><p>父子进程相同:<br>刚fork后:  data段, text段, 堆, 栈, 环境变量, 宿主目录位置, 进程工作位置, 信号处理方式  </p>
+</li>
+<li><p>父子进程不同:<br>进程id, 返回值, 各自的父进程, 进程创建时间, 闹钟, 未决信号集  </p>
+</li>
+<li><p>父子进程共享:<br>读时共享,写时复制<br>文件描述符, mmap映射区  </p>
+</li>
+<li><p>获取进程各个<code>id</code>函数:<br><code>getpid()</code>:获取当前进程<code>id</code><br><code>getppid()</code>:获取父进程的<code>id</code><br><code>getgid()</code>:获取当前组<code>id</code></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://editso.github.io/2019/12/01/linux-func-use/" data-id="ckvgoguoy000e8znfd90j576t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/19/ssh-log/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          记录一次服务器免密登录失效问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/28/makefile-use/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">makefile文件的使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Acm/" rel="tag">Acm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CPP/" rel="tag">CPP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/" rel="tag">Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Desktop/" rel="tag">Desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editor/" rel="tag">Editor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCC/" rel="tag">GCC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/" rel="tag">GDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/" rel="tag">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GRUB/" rel="tag">GRUB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kde/" rel="tag">Kde</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Make/" rel="tag">Make</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theme/" rel="tag">Theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VirtualBox/" rel="tag">VirtualBox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%93%E5%BA%93/" rel="tag">仓库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A3%81%E7%BA%B8/" rel="tag">壁纸</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F/" rel="tag">系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91/" rel="tag">踩坑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/" rel="tag">踩坑记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Acm/" style="font-size: 10px;">Acm</a> <a href="/tags/Algorithm/" style="font-size: 11.67px;">Algorithm</a> <a href="/tags/C/" style="font-size: 16.67px;">C</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Code/" style="font-size: 10px;">Code</a> <a href="/tags/Desktop/" style="font-size: 10px;">Desktop</a> <a href="/tags/Editor/" style="font-size: 10px;">Editor</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/GCC/" style="font-size: 11.67px;">GCC</a> <a href="/tags/GDB/" style="font-size: 10px;">GDB</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GRUB/" style="font-size: 10px;">GRUB</a> <a href="/tags/Kde/" style="font-size: 10px;">Kde</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Manjaro/" style="font-size: 10px;">Manjaro</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Theme/" style="font-size: 11.67px;">Theme</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VirtualBox/" style="font-size: 11.67px;">VirtualBox</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/%E4%BB%93%E5%BA%93/" style="font-size: 10px;">仓库</a> <a href="/tags/%E5%A3%81%E7%BA%B8/" style="font-size: 10px;">壁纸</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">学习笔记</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 20px;">日志</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">系统</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 11.67px;">编程</a> <a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 10px;">踩坑</a> <a href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 13.33px;">踩坑记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/21/c-01-log/">记一次C内存溢出问题</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/21/grub-log/">GRUB双系统找不到Windows问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/08/acm-01/">acm-士兵队列训练问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/03/c-log/">记录一次学习C++时编译失败出现(multiple definition of xxx first defined here collect2)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/30/virtualbox-log/">解决VirtualBox无法启用嵌套分页</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 zy<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

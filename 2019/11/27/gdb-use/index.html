@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>gdb调试工具的使用 | editso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="gdb调试工具的使用简介简单地说就是一个调试工具。它是一个受通用公共许可证即GPL保护的自由软件。 使用使用gdb调试工具时，在gcc打包为二进制文件时需要指定-g参数表示在该程序中添加调试语句当编译好后，执行gdb 需要被调试的程序   相关命令 list &#x2F; l列出被调试程序的源代码，根据源码向指定位置设置断点显示出源代码的下一页使用 list &#x2F; l  break &#x2F; b设置断点：break">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gdb调试工具的使用">
+<meta property="og:url" content="http://editso.github.io/2019/11/27/gdb-use/index.html">
+<meta property="og:site_name" content="editso">
+<meta property="og:description" content="gdb调试工具的使用简介简单地说就是一个调试工具。它是一个受通用公共许可证即GPL保护的自由软件。 使用使用gdb调试工具时，在gcc打包为二进制文件时需要指定-g参数表示在该程序中添加调试语句当编译好后，执行gdb 需要被调试的程序   相关命令 list &#x2F; l列出被调试程序的源代码，根据源码向指定位置设置断点显示出源代码的下一页使用 list &#x2F; l  break &#x2F; b设置断点：break">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-11-27T21:48:14.000Z">
+<meta property="article:modified_time" content="2021-11-01T13:08:02.878Z">
+<meta property="article:author" content="zy">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="GDB">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="editso" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">editso</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://editso.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-gdb-use" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/gdb-use/" class="article-date">
+  <time datetime="2019-11-27T21:48:14.000Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gdb调试工具的使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="gdb调试工具的使用"><a href="#gdb调试工具的使用" class="headerlink" title="gdb调试工具的使用"></a>gdb调试工具的使用</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>简单地说就是一个调试工具。它是一个受通用公共许可证即GPL保护的自由软件。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用gdb调试工具时，在gcc打包为二进制文件时需要指定<code>-g</code>参数表示在该程序中添加调试语句<br>当编译好后，执行<code>gdb 需要被调试的程序</code>  </p>
+<h2 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h2><ul>
+<li><p><code>list</code> / <code>l</code><br>列出被调试程序的源代码，根据源码向指定位置设置断点<br>显示出源代码的下一页使用 <code>list / l</code></p>
+</li>
+<li><p><code>break</code> / <code>b</code><br>设置断点：<code>break / b 行号</code><br>设置条件断点：<code>b 行号 if 条件</code>当满足条件时才会执行，一般用在循环/递归语句</p>
+</li>
+<li><p><code>run</code> / <code>r</code><br>运行程序<br>不用设置断点直接执行，如果遇到程序出现错误时会显示出错的行数,可快速找到错误<br>该命令还可以在后面添加参数，每个参数以空格分开，它表示向<code>main</code>函数中传入参数</p>
+</li>
+<li><p><code>n</code> (next) / <code>S</code> (step)<br><code>n</code>/<code>S</code> 表示执行下一条指令<br>它们的区别在于执行函数的时候，当使用<code>n</code>来执行的时候会直接越过函数不会进入到函数内部执行而是直接执行到下一行,而<code>S</code>则反之<br>在调试时可以按需选择如何使用这两个命令<br>gbd调试时有一个小毛病就是在进入到函数内部时如果是库函数就会报<code>找不到那个文件</code>所以在使用时要注意执行遇到库函数时要使用<code>n</code>来执行</p>
+</li>
+<li><p><code>p</code><br>显示指定变量的值<code>p 变量名</code></p>
+</li>
+<li><p><code>continue</code><br>继续执行断点后续指令</p>
+</li>
+<li><p><code>quit</code><br>退出当前调试</p>
+</li>
+<li><p><code>finish</code><br>结束当前函数调用，回到调用点</p>
+</li>
+<li><p><code>set args</code><br><code>set args args1 args2 ..</code><br>在执行程序前设置命令行参数:</p>
+</li>
+<li><p><code>info b</code><br>查看<code>gdb</code>调试表中调试的内容</p>
+</li>
+<li><p><code>ptype</code><br>查看变量类型：<code>ptype 变量</code></p>
+</li>
+<li><p><code>bt</code>(backtrace)<br>列出当前程序正存活着的栈帧<br>它通常与<code>frame</code>配合使用</p>
+</li>
+<li><p><code>frame</code><br>根据栈帧编号，切换栈桢<br>它通常与<code>bt</code>配合使用</p>
+</li>
+<li><p><code>set follow-fork-mode [child | parent]</code>    </p>
+<ul>
+<li><code>child</code>: 跟踪子进程  </li>
+<li><code>parent</code>: 跟踪父进程  </li>
+</ul>
+</li>
+<li><p><code>display</code> &amp; <code>undisplay</code>   </p>
+<ul>
+<li><code>display</code>: 设置跟踪变量</li>
+<li><code>undisplay</code>[编号]: 取消跟踪变量</li>
+</ul>
+</li>
+</ul>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>栈帧: 随着函数调用而在<code>stack</code>上开辟的一片内存空间, 用于存放函数调用时产生的局部变量和临时值  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://editso.github.io/2019/11/27/gdb-use/" data-id="ckvgoguop00088znf6liiacb9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GDB/" rel="tag">GDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/28/makefile-use/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          makefile文件的使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/27/vim-use/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vim编辑器使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Acm/" rel="tag">Acm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CPP/" rel="tag">CPP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/" rel="tag">Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Desktop/" rel="tag">Desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Editor/" rel="tag">Editor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCC/" rel="tag">GCC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/" rel="tag">GDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/" rel="tag">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GRUB/" rel="tag">GRUB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kde/" rel="tag">Kde</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Make/" rel="tag">Make</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theme/" rel="tag">Theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VirtualBox/" rel="tag">VirtualBox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%93%E5%BA%93/" rel="tag">仓库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A3%81%E7%BA%B8/" rel="tag">壁纸</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F/" rel="tag">系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91/" rel="tag">踩坑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/" rel="tag">踩坑记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Acm/" style="font-size: 10px;">Acm</a> <a href="/tags/Algorithm/" style="font-size: 11.67px;">Algorithm</a> <a href="/tags/C/" style="font-size: 16.67px;">C</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Code/" style="font-size: 10px;">Code</a> <a href="/tags/Desktop/" style="font-size: 10px;">Desktop</a> <a href="/tags/Editor/" style="font-size: 10px;">Editor</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/GCC/" style="font-size: 11.67px;">GCC</a> <a href="/tags/GDB/" style="font-size: 10px;">GDB</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GRUB/" style="font-size: 10px;">GRUB</a> <a href="/tags/Kde/" style="font-size: 10px;">Kde</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Manjaro/" style="font-size: 10px;">Manjaro</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Theme/" style="font-size: 11.67px;">Theme</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VirtualBox/" style="font-size: 11.67px;">VirtualBox</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/%E4%BB%93%E5%BA%93/" style="font-size: 10px;">仓库</a> <a href="/tags/%E5%A3%81%E7%BA%B8/" style="font-size: 10px;">壁纸</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">学习笔记</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 20px;">日志</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">系统</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 11.67px;">编程</a> <a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 10px;">踩坑</a> <a href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 13.33px;">踩坑记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/21/c-01-log/">记一次C内存溢出问题</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/21/grub-log/">GRUB双系统找不到Windows问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/08/acm-01/">acm-士兵队列训练问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/03/c-log/">记录一次学习C++时编译失败出现(multiple definition of xxx first defined here collect2)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/30/virtualbox-log/">解决VirtualBox无法启用嵌套分页</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 zy<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
