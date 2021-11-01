@@ -23,9 +23,9 @@ jobs:
             ${{ runner.OS }}-npm-cache
       - name: Build
           run: |
-                npm i
-                npm install hexo-cli -g
-                hexo clean && hexo generate
+              npm i
+              npm install hexo-cli -g
+              hexo clean && hexo generate
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
