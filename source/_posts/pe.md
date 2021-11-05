@@ -312,6 +312,7 @@ typedef struct _IMAGE_EXPORT_DIRECTORY {
 ##### 打印`32位`导出表信息列子
 ```
 #include <Windows.h>
+#include <winnt.h>
 #include <stdio.h>
 
 DWORD RvaToFov(PIMAGE_SECTION_HEADER sec, DWORD secCount, DWORD rva) {
@@ -512,6 +513,7 @@ typedef struct _IMAGE_THUNK_DATA32 {
 ##### 打印`32位`导入表列子
 ```
 #include <Windows.h>
+#include <winnt.h>
 #include <stdio.h>
 
 
@@ -667,9 +669,10 @@ typedef IMAGE_BASE_RELOCATION UNALIGNED * PIMAGE_BASE_RELOCATION;
 2. **SizeOfBlock**:
     当前表大小
 
-##### 打印重定位表列子
+##### 打印`32位`重定位表列子
 ```
 #include <Windows.h>
+#include <winnt.h>
 #include <stdio.h>
 
 DWORD RvaToFov(PIMAGE_SECTION_HEADER sec, DWORD secCount, DWORD rva) {
