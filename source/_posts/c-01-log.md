@@ -30,4 +30,3 @@ int main(int argc, char **argv){
 将 `buff`变量加上`static`关键字或缩小`buff`大小即可解决问题,还可以将`buff`作为全局变量
 
 
-
