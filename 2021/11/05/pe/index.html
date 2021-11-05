@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 5.4.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>PE头文件学习笔记 - editso</title>
+
+  
+    <meta name="description" content="可移植可执行 是一种用于可执行文件、目标文件和动态链接库的文件格式，主要使用在32位和64位的Windows操作系统上。可移植的是指该文件格式的通用性，可用于许多种不同的操作系统和体系结构中。PE文件格式封装了Windows操作系统加载可执行程序代码时所必需的一些信息。这些信息包括动态链接库、API导入和导出表、资源管理数据和线程局部存储数据。在Windows NT操作系统中，PE文件格式主要用于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PE头文件学习笔记">
+<meta property="og:url" content="http://editso.github.io/2021/11/05/pe/index.html">
+<meta property="og:site_name" content="editso">
+<meta property="og:description" content="可移植可执行 是一种用于可执行文件、目标文件和动态链接库的文件格式，主要使用在32位和64位的Windows操作系统上。可移植的是指该文件格式的通用性，可用于许多种不同的操作系统和体系结构中。PE文件格式封装了Windows操作系统加载可执行程序代码时所必需的一些信息。这些信息包括动态链接库、API导入和导出表、资源管理数据和线程局部存储数据。在Windows NT操作系统中，PE文件格式主要用于">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-05T13:01:22.000Z">
+<meta property="article:modified_time" content="2021-11-05T09:41:02.050Z">
+<meta property="article:author" content="zy">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.2/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://avatars.githubusercontent.com/u/37452715" onerror="javascript:this.classList.add('error');this.src='https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></a><a class="title" href="/"><div class="main">editso</div></a></div>
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a></nav></header>
+
+<div class="widgets">
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E7%A7%BB%E6%A4%8D%E5%8F%AF%E6%89%A7%E8%A1%8C"><span class="toc-text">可移植可执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOS%E5%A4%B4-winnt-h"><span class="toc-text">DOS头 winnt.h</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%BF%A1%E6%81%AF"><span class="toc-text">结构体信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E5%AD%97%E6%AE%B5%E8%AF%B4%E6%98%8E"><span class="toc-text">重要字段说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NT%E5%A4%B4"><span class="toc-text">NT头</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%BF%A1%E6%81%AF-1"><span class="toc-text">结构体信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x86"><span class="toc-text">x86</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x64"><span class="toc-text">x64</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E5%AD%97%E6%AE%B5%E8%AF%B4%E6%98%8E-1"><span class="toc-text">重要字段说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B4"><span class="toc-text">文件头</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%BF%A1%E6%81%AF-2"><span class="toc-text">结构体信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E5%AD%97%E6%AE%B5%E8%AF%B4%E6%98%8E-2"><span class="toc-text">重要字段说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E9%80%89PE%E5%A4%B4"><span class="toc-text">可选PE头</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%BF%A1%E6%81%AF-3"><span class="toc-text">结构体信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x86-1"><span class="toc-text">x86</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x64-1"><span class="toc-text">x64</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E5%AD%97%E6%AE%B5%E8%AF%B4%E6%98%8E-3"><span class="toc-text">重要字段说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%82%E8%A1%A8"><span class="toc-text">节表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%BF%A1%E6%81%AF-4"><span class="toc-text">结构体信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E5%AD%97%E6%AE%B5%E8%AF%B4%E6%98%8E-4"><span class="toc-text">重要字段说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E8%A1%A8"><span class="toc-text">目录表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%BF%A1%E6%81%AF-5"><span class="toc-text">结构体信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E5%AD%97%E6%AE%B5%E4%BF%A1%E6%81%AF%E8%AF%B4%E6%98%8E"><span class="toc-text">重要字段信息说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E8%A1%A8%E7%9B%B8%E5%85%B3%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-text">目标表相关结构体</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E8%A1%A8"><span class="toc-text">导出表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%BF%A1%E6%81%AF-6"><span class="toc-text">结构体信息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E5%AD%97%E6%AE%B5%E8%AF%B4%E6%98%8E-5"><span class="toc-text">重要字段说明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%89%93%E5%8D%B032%E4%BD%8D%E5%AF%BC%E5%87%BA%E8%A1%A8%E4%BF%A1%E6%81%AF%E5%88%97%E5%AD%90"><span class="toc-text">打印32位导出表信息列子</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E8%A1%A8"><span class="toc-text">导入表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%BB%93%E6%9E%84%E4%BD%93%E4%BF%A1%E6%81%AF"><span class="toc-text">相关结构体信息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%89%93%E5%8D%B032%E4%BD%8D%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%88%97%E5%AD%90"><span class="toc-text">打印32位导入表列子</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E4%BD%8D%E8%A1%A8"><span class="toc-text">重定位表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%BF%A1%E6%81%AF-7"><span class="toc-text">结构体信息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E5%AD%97%E6%AE%B5%E8%AF%B4%E6%98%8E-7"><span class="toc-text">重要字段说明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%89%93%E5%8D%B0%E9%87%8D%E5%AE%9A%E4%BD%8D%E8%A1%A8%E5%88%97%E5%AD%90"><span class="toc-text">打印重定位表列子</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div>
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="GitHub" href="https://github.com/editso" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.3/social/08a41b181ce68.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">editso</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-11-05T13:01:22.000Z">2021-11-05</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>PE头文件学习笔记</span></h1>
+<h2 id="可移植可执行"><a href="#可移植可执行" class="headerlink" title="可移植可执行"></a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E7%A7%BB%E6%A4%8D%E5%8F%AF%E6%89%A7%E8%A1%8C">可移植可执行</a></h2><ol>
+<li>是一种用于可执行文件、目标文件和动态链接库的文件格式，主要使用在32位和64位的Windows操作系统上。<code>可移植的</code>是指该文件格式的通用性，可用于许多种不同的操作系统和体系结构中。PE文件格式封装了Windows操作系统加载可执行程序代码时所必需的一些信息。这些信息包括动态链接库、API导入和导出表、资源管理数据和线程局部存储数据。在Windows NT操作系统中，PE文件格式主要用于EXE文件、DLL文件、.sys（驱动程序）和其他文件类型。可扩展固件接口（EFI）技术规范书中说明PE格式是EFI环境中的标准可执行文件格式。开头为DOS头部。</li>
+<li>PE格式是由Unix中的COFF格式修改而来的。在Windows开发环境中，PE格式也称为PE/COFF格式。</li>
+</ol>
+<h2 id="DOS头-winnt-h"><a href="#DOS头-winnt-h" class="headerlink" title="DOS头 winnt.h"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/debug/pe-format#ms-dos-stub-image-only">DOS头</a> <code>winnt.h</code></h2><h3 id="结构体信息"><a href="#结构体信息" class="headerlink" title="结构体信息"></a>结构体信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_DOS_HEADER &#123;      // DOS .EXE header</span><br><span class="line">    WORD   e_magic;                     // * Magic number </span><br><span class="line">    WORD   e_cblp;                      // Bytes on last page of file</span><br><span class="line">    WORD   e_cp;                        // Pages in file</span><br><span class="line">    WORD   e_crlc;                      // Relocations</span><br><span class="line">    WORD   e_cparhdr;                   // Size of header in paragraphs</span><br><span class="line">    WORD   e_minalloc;                  // Minimum extra paragraphs needed</span><br><span class="line">    WORD   e_maxalloc;                  // Maximum extra paragraphs needed</span><br><span class="line">    WORD   e_ss;                        // Initial (relative) SS value</span><br><span class="line">    WORD   e_sp;                        // Initial SP value</span><br><span class="line">    WORD   e_csum;                      // Checksum</span><br><span class="line">    WORD   e_ip;                        // Initial IP value</span><br><span class="line">    WORD   e_cs;                        // Initial (relative) CS value</span><br><span class="line">    WORD   e_lfarlc;                    // File address of relocation table</span><br><span class="line">    WORD   e_ovno;                      // Overlay number</span><br><span class="line">    WORD   e_res[4];                    // Reserved words</span><br><span class="line">    WORD   e_oemid;                     // OEM identifier (for e_oeminfo)</span><br><span class="line">    WORD   e_oeminfo;                   // OEM information; e_oemid specific</span><br><span class="line">    WORD   e_res2[10];                  // Reserved words</span><br><span class="line">    LONG   e_lfanew;                    // * File address of new exe header</span><br><span class="line">&#125; IMAGE_DOS_HEADER, *PIMAGE_DOS_HEADER;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="重要字段说明"><a href="#重要字段说明" class="headerlink" title="重要字段说明"></a>重要字段说明</h3><ol>
+<li><strong>e_magic</strong>: 4D5A<br> 该字段标识是否是一个PE文件以</li>
+<li><strong>e_lfanew</strong>: –<br> 指向 NT头(<strong>IMAGE_NT_HEADER</strong>) 起始地址</li>
+</ol>
+<h2 id="NT头"><a href="#NT头" class="headerlink" title="NT头"></a>NT头</h2><p>NT在64和32结构没有发生变法, 只是字段类型长度有变</p>
+<h3 id="结构体信息-1"><a href="#结构体信息-1" class="headerlink" title="结构体信息"></a>结构体信息</h3><h4 id="x86"><a href="#x86" class="headerlink" title="x86"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_nt_headers32">x86</a></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_NT_HEADERS &#123;</span><br><span class="line">    DWORD Signature;</span><br><span class="line">    IMAGE_FILE_HEADER FileHeader;</span><br><span class="line">    IMAGE_OPTIONAL_HEADER32 OptionalHeader;</span><br><span class="line">&#125; IMAGE_NT_HEADERS32, *PIMAGE_NT_HEADERS32;</span><br></pre></td></tr></table></figure>
+<h4 id="x64"><a href="#x64" class="headerlink" title="x64"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_nt_headers64">x64</a></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_NT_HEADERS64 &#123;</span><br><span class="line">  DWORD                   Signature;</span><br><span class="line">  IMAGE_FILE_HEADER       FileHeader;</span><br><span class="line">  IMAGE_OPTIONAL_HEADER64 OptionalHeader;</span><br><span class="line">&#125; IMAGE_NT_HEADERS64, *PIMAGE_NT_HEADERS64;</span><br></pre></td></tr></table></figure>
+
+<h3 id="重要字段说明-1"><a href="#重要字段说明-1" class="headerlink" title="重要字段说明"></a>重要字段说明</h3><ol>
+<li><strong>Signature</strong>: 5045<br> 4字节PE标识</li>
+</ol>
+<h2 id="文件头"><a href="#文件头" class="headerlink" title="文件头"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_file_header">文件头</a></h2><h3 id="结构体信息-2"><a href="#结构体信息-2" class="headerlink" title="结构体信息"></a>结构体信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_FILE_HEADER &#123;</span><br><span class="line">  WORD  Machine;              //  IMAGE_FILE_MACHINE_I386(0x014c) , IMAGE_FILE_MACHINE_IA64(0x0200), IMAGE_FILE_MACHINE_AMD64(0x8664)</span><br><span class="line">  WORD  NumberOfSections;     // *</span><br><span class="line">  DWORD TimeDateStamp;        // - </span><br><span class="line">  DWORD PointerToSymbolTable; // -</span><br><span class="line">  DWORD NumberOfSymbols;      // - </span><br><span class="line">  WORD  SizeOfOptionalHeader; // *</span><br><span class="line">  WORD  Characteristics;      // *</span><br><span class="line">&#125; IMAGE_FILE_HEADER, *PIMAGE_FILE_HEADER;</span><br></pre></td></tr></table></figure>
+
+<h3 id="重要字段说明-2"><a href="#重要字段说明-2" class="headerlink" title="重要字段说明"></a>重要字段说明</h3><ol>
+<li><p><strong>NumberOfSections</strong><br> 节数量</p>
+</li>
+<li><p><strong>SizeOfOptionalHeader</strong><br> 可选PE头的大小</p>
+</li>
+<li><p><strong>Characteristics</strong><br> 属性信息</p>
+</li>
+</ol>
+<h2 id="可选PE头"><a href="#可选PE头" class="headerlink" title="可选PE头"></a>可选PE头</h2><h3 id="结构体信息-3"><a href="#结构体信息-3" class="headerlink" title="结构体信息"></a>结构体信息</h3><h4 id="x86-1"><a href="#x86-1" class="headerlink" title="x86"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_optional_header32">x86</a></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_OPTIONAL_HEADER &#123;</span><br><span class="line">  WORD                 Magic;</span><br><span class="line">  BYTE                 MajorLinkerVersion;</span><br><span class="line">  BYTE                 MinorLinkerVersion;</span><br><span class="line">  DWORD                SizeOfCode;</span><br><span class="line">  DWORD                SizeOfInitializedData;</span><br><span class="line">  DWORD                SizeOfUninitializedData;</span><br><span class="line">  DWORD                AddressOfEntryPoint;</span><br><span class="line">  DWORD                BaseOfCode;</span><br><span class="line">  DWORD                BaseOfData;</span><br><span class="line">  DWORD                ImageBase;</span><br><span class="line">  DWORD                SectionAlignment;</span><br><span class="line">  DWORD                FileAlignment;</span><br><span class="line">  WORD                 MajorOperatingSystemVersion;</span><br><span class="line">  WORD                 MinorOperatingSystemVersion;</span><br><span class="line">  WORD                 MajorImageVersion;</span><br><span class="line">  WORD                 MinorImageVersion;</span><br><span class="line">  WORD                 MajorSubsystemVersion;</span><br><span class="line">  WORD                 MinorSubsystemVersion;</span><br><span class="line">  DWORD                Win32VersionValue;</span><br><span class="line">  DWORD                SizeOfImage;</span><br><span class="line">  DWORD                SizeOfHeaders;</span><br><span class="line">  DWORD                CheckSum;</span><br><span class="line">  WORD                 Subsystem;</span><br><span class="line">  WORD                 DllCharacteristics;</span><br><span class="line">  DWORD                SizeOfStackReserve;</span><br><span class="line">  DWORD                SizeOfStackCommit;</span><br><span class="line">  DWORD                SizeOfHeapReserve;</span><br><span class="line">  DWORD                SizeOfHeapCommit;</span><br><span class="line">  DWORD                LoaderFlags;</span><br><span class="line">  DWORD                NumberOfRvaAndSizes;</span><br><span class="line">  IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];</span><br><span class="line">&#125; IMAGE_OPTIONAL_HEADER32, *PIMAGE_OPTIONAL_HEADER32;</span><br></pre></td></tr></table></figure>
+<h4 id="x64-1"><a href="#x64-1" class="headerlink" title="x64"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_optional_header64">x64</a></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_OPTIONAL_HEADER64 &#123;</span><br><span class="line">  WORD                 Magic;                       // *</span><br><span class="line">  BYTE                 MajorLinkerVersion;          // -</span><br><span class="line">  BYTE                 MinorLinkerVersion;          // -</span><br><span class="line">  DWORD                SizeOfCode;                  // -</span><br><span class="line">  DWORD                SizeOfInitializedData;       // -</span><br><span class="line">  DWORD                SizeOfUninitializedData;     // -</span><br><span class="line">  DWORD                AddressOfEntryPoint;         // *</span><br><span class="line">  DWORD                BaseOfCode;                  // -</span><br><span class="line">  ULONGLONG            ImageBase;                   // *</span><br><span class="line">  DWORD                SectionAlignment;            // *</span><br><span class="line">  DWORD                FileAlignment;               // *</span><br><span class="line">  WORD                 MajorOperatingSystemVersion; // -</span><br><span class="line">  WORD                 MinorOperatingSystemVersion; // -</span><br><span class="line">  WORD                 MajorImageVersion;           // -</span><br><span class="line">  WORD                 MinorImageVersion;           // -</span><br><span class="line">  WORD                 MajorSubsystemVersion;       // -</span><br><span class="line">  WORD                 MinorSubsystemVersion;       // -</span><br><span class="line">  DWORD                Win32VersionValue;           // -</span><br><span class="line">  DWORD                SizeOfImage;                 // *</span><br><span class="line">  DWORD                SizeOfHeaders;               // *</span><br><span class="line">  DWORD                CheckSum;                    // -</span><br><span class="line">  WORD                 Subsystem;                   // -</span><br><span class="line">  WORD                 DllCharacteristics;          // -</span><br><span class="line">  ULONGLONG            SizeOfStackReserve;          // -</span><br><span class="line">  ULONGLONG            SizeOfStackCommit;           // -</span><br><span class="line">  ULONGLONG            SizeOfHeapReserve;           // -</span><br><span class="line">  ULONGLONG            SizeOfHeapCommit;            // -</span><br><span class="line">  DWORD                LoaderFlags;                 // -</span><br><span class="line">  DWORD                NumberOfRvaAndSizes;         // -</span><br><span class="line">  IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];</span><br><span class="line">&#125; IMAGE_OPTIONAL_HEADER64, *PIMAGE_OPTIONAL_HEADER64;</span><br></pre></td></tr></table></figure>
+
+<h3 id="重要字段说明-3"><a href="#重要字段说明-3" class="headerlink" title="重要字段说明"></a>重要字段说明</h3><ol>
+<li><p><strong>Magic</strong>:</p>
+<ul>
+<li>IMAGE_NT_OPTIONAL_HDR32_MAGIC: 0x10b<br>  32位可执行文件</li>
+<li>IMAGE_NT_OPTIONAL_HDR64_MAGIC: 0x20b<br>  64位可执行文件</li>
+<li>IMAGE_ROM_OPTIONAL_HDR_MAGIC: 0x107<br>  ROM文件</li>
+</ul>
+</li>
+<li><p><strong>AddressOfEntryPoint</strong>:<br> 存储入口函数偏移, 该值只是一个偏移, 真实地址需要加上 <strong>ImageBase</strong></p>
+</li>
+<li><p><strong>ImageBase</strong>:</p>
+<ul>
+<li>在内存中加载的首地址, 该值是<code>64K</code>字节的倍数</li>
+<li>DLL 的默认值为 0x10000000。应用程序的默认值为0x00400000，但0x00010000的 Windows CE 除外</li>
+</ul>
+</li>
+<li><p><strong>SectionAlignment</strong>:</p>
+<ul>
+<li>在内存中加载后节表应该按多少字节对齐</li>
+</ul>
+</li>
+<li><p><strong>FileAlignment</strong>:</p>
+<ul>
+<li>在文件中应该按多少字节对齐, 默认按<code>512K</code>对齐</li>
+</ul>
+</li>
+<li><p><strong>SizeOfImage</strong>:</p>
+<ul>
+<li>加载到内存中的总大小</li>
+</ul>
+</li>
+<li><p><strong>SizeOfHeaders</strong>:</p>
+<ul>
+<li>PE头总大小, <strong>包括节表</strong></li>
+</ul>
+</li>
+</ol>
+<h2 id="节表"><a href="#节表" class="headerlink" title="节表"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_section_header">节表</a></h2><p>节表中定义了相关数据开始与结束信息 <em>(如: 代码段, 数据段, …)</em>, 它很重要,但节表中的值都是RAV 也就是拉伸后的<code>偏移地址</code></p>
+<h3 id="结构体信息-4"><a href="#结构体信息-4" class="headerlink" title="结构体信息"></a>结构体信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_SECTION_HEADER &#123;</span><br><span class="line">  BYTE  Name[IMAGE_SIZEOF_SHORT_NAME];  // *</span><br><span class="line">  union &#123;                              </span><br><span class="line">    DWORD PhysicalAddress;              </span><br><span class="line">    DWORD VirtualSize;                  </span><br><span class="line">  &#125; Misc;                               // *</span><br><span class="line">  DWORD VirtualAddress;                 // *</span><br><span class="line">  DWORD SizeOfRawData;                  // *</span><br><span class="line">  DWORD PointerToRawData;               // *</span><br><span class="line">  DWORD PointerToRelocations;           // -</span><br><span class="line">  DWORD PointerToLinenumbers;           // -</span><br><span class="line">  WORD  NumberOfRelocations;            // -</span><br><span class="line">  WORD  NumberOfLinenumbers;            // -</span><br><span class="line">  DWORD Characteristics;                // *</span><br><span class="line">&#125; IMAGE_SECTION_HEADER, *PIMAGE_SECTION_HEADER;</span><br></pre></td></tr></table></figure>
+<h3 id="重要字段说明-4"><a href="#重要字段说明-4" class="headerlink" title="重要字段说明"></a>重要字段说明</h3><ol>
+<li><strong>Name</strong>:<br> 节表名称, 注意它不会以0结尾, 所以在获取节表名称时需要注意</li>
+<li><strong>Misc</strong>:<br> 它在内存中加载后的大小</li>
+<li><strong>VirtualAddress</strong>:<br> 内存中的偏移<code>(RVA)</code></li>
+<li><strong>SizeOfRawData</strong>:<br> 节区数据大小, <code>Misc</code> 中的数据可能比它大</li>
+<li><strong>PointerToRawData</strong>:<br> 文件偏移地址<code>(FOV)</code></li>
+</ol>
+<h2 id="目录表"><a href="#目录表" class="headerlink" title="目录表"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_data_directory">目录表</a></h2><p>目录表有16个, 分别为:</p>
+<ol>
+<li>IMAGE_DIRECTORY_ENTRY_ARCHITECTURE: 7<br> Architecture-specific data</li>
+<li>IMAGE_DIRECTORY_ENTRY_BASERELOC: 5<br> Base relocation table</li>
+<li>IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT: 11<br> Bound import directory</li>
+<li>IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR: 14<br> COM descriptor table</li>
+<li>IMAGE_DIRECTORY_ENTRY_DEBUG: 6<br> Debug directory</li>
+<li>IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT: 13<br> Delay import table</li>
+<li>IMAGE_DIRECTORY_ENTRY_EXCEPTION: 3<br> Exception directory</li>
+<li>IMAGE_DIRECTORY_ENTRY_EXPORT: 0<br> Export directory</li>
+<li>IMAGE_DIRECTORY_ENTRY_GLOBALPTR: 8<br> The relative virtual address of global pointer</li>
+<li>IMAGE_DIRECTORY_ENTRY_IAT: 12<br>Import address table</li>
+<li>IMAGE_DIRECTORY_ENTRY_IMPORT: 1<br>Import directory</li>
+<li>IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG: 10<br>Load configuration directory</li>
+<li>IMAGE_DIRECTORY_ENTRY_RESOURCE: 2<br>Resource directory</li>
+<li>IMAGE_DIRECTORY_ENTRY_SECURITY: 4<br>Security directory</li>
+<li>IMAGE_DIRECTORY_ENTRY_TLS: 9<br>Thread local storage directory  </li>
+</ol>
+<h3 id="结构体信息-5"><a href="#结构体信息-5" class="headerlink" title="结构体信息"></a>结构体信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_DATA_DIRECTORY &#123;</span><br><span class="line">  DWORD VirtualAddress; // *</span><br><span class="line">  DWORD Size;</span><br><span class="line">&#125; IMAGE_DATA_DIRECTORY, *PIMAGE_DATA_DIRECTORY;</span><br></pre></td></tr></table></figure>
+
+<h3 id="重要字段信息说明"><a href="#重要字段信息说明" class="headerlink" title="重要字段信息说明"></a>重要字段信息说明</h3><ol>
+<li><strong>VirtualAddress</strong>:<br> 指向各表偏移<code>(RVA)</code></li>
+</ol>
+<h3 id="目标表相关结构体"><a href="#目标表相关结构体" class="headerlink" title="目标表相关结构体"></a>目标表相关结构体</h3><p>这里只列出 导出表,  导入表, 重定位表</p>
+<h4 id="导出表"><a href="#导出表" class="headerlink" title="导出表"></a>导出表</h4><p>导出表比较复杂, 需要理解导出方式与查找函数首地址</p>
+<h5 id="结构体信息-6"><a href="#结构体信息-6" class="headerlink" title="结构体信息"></a>结构体信息</h5><figure class="highlight plaintext"><figcaption><span>导出表</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_EXPORT_DIRECTORY &#123;</span><br><span class="line">    DWORD   Characteristics;</span><br><span class="line">    DWORD   TimeDateStamp;</span><br><span class="line">    WORD    MajorVersion;</span><br><span class="line">    WORD    MinorVersion;</span><br><span class="line">    DWORD   Name;</span><br><span class="line">    DWORD   Base;</span><br><span class="line">    DWORD   NumberOfFunctions;</span><br><span class="line">    DWORD   NumberOfNames;</span><br><span class="line">    DWORD   AddressOfFunctions;     // RVA from base of image</span><br><span class="line">    DWORD   AddressOfNames;         // RVA from base of image</span><br><span class="line">    DWORD   AddressOfNameOrdinals;  // RVA from base of image</span><br><span class="line">&#125; IMAGE_EXPORT_DIRECTORY, *PIMAGE_EXPORT_DIRECTORY;</span><br></pre></td></tr></table></figure>
+
+<h5 id="重要字段说明-5"><a href="#重要字段说明-5" class="headerlink" title="重要字段说明"></a>重要字段说明</h5><ol>
+<li><strong>Name</strong>:<br> 导出文件名称偏移地址 <code>(RVA)</code></li>
+<li><strong>Base</strong>:<br> 需要开始</li>
+<li><strong>NumberOfFunctions</strong>:<br> 导出函数数量</li>
+<li><strong>NumberOfNames</strong>:<br> 以名称导出的函数数量</li>
+<li><strong>AddressOfFunctions</strong>:<br> 导出的函数存放首地址偏移 <code>(RVA)</code></li>
+<li><strong>AddressOfNames</strong>:<br> 以名称导出的函数存放首地址偏移<code>(RVA)</code></li>
+<li><strong>AddressOfNameOrdinals</strong>:<br> 以名称导出的函数指向的序号地址偏移 <code>(RVA)</code></li>
+</ol>
+<h5 id="打印32位导出表信息列子"><a href="#打印32位导出表信息列子" class="headerlink" title="打印32位导出表信息列子"></a>打印<code>32位</code>导出表信息列子</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">DWORD RvaToFov(PIMAGE_SECTION_HEADER sec, DWORD secCount, DWORD rva) &#123;</span><br><span class="line"></span><br><span class="line">	for (int i = 0; i &lt; secCount; i++) &#123;</span><br><span class="line">		</span><br><span class="line">		if (sec-&gt;VirtualAddress &lt;= rva &amp;&amp; sec-&gt;VirtualAddress + sec-&gt;SizeOfRawData &gt;= rva) &#123;</span><br><span class="line">			return rva - sec-&gt;VirtualAddress + sec-&gt;PointerToRawData;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		sec++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void printExportTable(const char* dllName) &#123;</span><br><span class="line">	LPBYTE lpBuffer = NULL;</span><br><span class="line">	HANDLE hFile = NULL;</span><br><span class="line">	DWORD fileSize = 0, readSize = 0, secCount = 0;</span><br><span class="line">	LPDWORD lpExportFunctions = NULL, lpExportFunctionNames = NULL;</span><br><span class="line">	LPWORD lpExportFunctionOrdinals = NULL;</span><br><span class="line">	PIMAGE_DOS_HEADER lpDosHeader = NULL;</span><br><span class="line">	PIMAGE_NT_HEADERS32 lpNtHeader = NULL;</span><br><span class="line">	PIMAGE_SECTION_HEADER lpFirstSection = NULL;</span><br><span class="line">	PIMAGE_EXPORT_DIRECTORY lpExport = NULL;</span><br><span class="line"></span><br><span class="line">	hFile = CreateFileA(dllName, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);</span><br><span class="line"></span><br><span class="line">	if (!hFile) &#123;</span><br><span class="line">		printf(&quot;读取%s失败\n&quot;, dllName);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fileSize = GetFileSize(hFile, NULL);</span><br><span class="line"></span><br><span class="line">	lpBuffer = (LPBYTE)VirtualAlloc(NULL, fileSize, MEM_COMMIT, PAGE_READWRITE);</span><br><span class="line"></span><br><span class="line">	if (!lpBuffer) &#123;</span><br><span class="line">		printf(&quot;分配内存失败 %d\n&quot;, fileSize);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	if (!ReadFile(hFile, lpBuffer, fileSize, &amp;readSize, NULL)) &#123;</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	lpDosHeader = (PIMAGE_DOS_HEADER)lpBuffer;</span><br><span class="line">	</span><br><span class="line">	if (lpDosHeader-&gt;e_magic != IMAGE_DOS_SIGNATURE) &#123;</span><br><span class="line">		printf(&quot;不是一个有效的PE文件\n&quot;);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	lpNtHeader = (PIMAGE_NT_HEADERS32)(lpBuffer + lpDosHeader-&gt;e_lfanew);</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	if (lpNtHeader-&gt;Signature != IMAGE_NT_SIGNATURE) &#123;</span><br><span class="line">		printf(&quot;不是一个有效的PE文件\n&quot;);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (lpNtHeader-&gt;OptionalHeader.Magic != IMAGE_NT_OPTIONAL_HDR32_MAGIC) &#123;</span><br><span class="line">		printf(&quot;不是一个32位PE文件\n&quot;);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	secCount = lpNtHeader-&gt;FileHeader.NumberOfSections;</span><br><span class="line">	lpFirstSection = (PIMAGE_SECTION_HEADER)((LPBYTE)&amp;lpNtHeader-&gt;OptionalHeader + lpNtHeader-&gt;FileHeader.SizeOfOptionalHeader);</span><br><span class="line">	</span><br><span class="line">	lpExport = lpBuffer + RvaToFov(</span><br><span class="line">			lpFirstSection, </span><br><span class="line">			secCount, </span><br><span class="line">			lpNtHeader-&gt;OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].VirtualAddress</span><br><span class="line">	);</span><br><span class="line"></span><br><span class="line">	// 导出函数</span><br><span class="line">	lpExportFunctions = (LPDWORD)(lpBuffer + RvaToFov(</span><br><span class="line">		lpFirstSection,</span><br><span class="line">		secCount,</span><br><span class="line">		lpExport-&gt;AddressOfFunctions</span><br><span class="line">	));</span><br><span class="line"></span><br><span class="line">	// 导出函数名称</span><br><span class="line">	lpExportFunctionNames = (LPDWORD)(lpBuffer + RvaToFov(</span><br><span class="line">		lpFirstSection,</span><br><span class="line">		secCount,</span><br><span class="line">		lpExport-&gt;AddressOfNames</span><br><span class="line">	));</span><br><span class="line"></span><br><span class="line">	// 导出序号</span><br><span class="line">	lpExportFunctionOrdinals = (LPWORD)(lpBuffer + RvaToFov(</span><br><span class="line">		lpFirstSection,</span><br><span class="line">		secCount,</span><br><span class="line">		lpExport-&gt;AddressOfNameOrdinals</span><br><span class="line">	));</span><br><span class="line"></span><br><span class="line">	printf(&quot;导出文件名称: %s\n&quot;, lpBuffer + RvaToFov(lpFirstSection, secCount, lpExport-&gt;Name));</span><br><span class="line">	printf(&quot;导出函数总数: 0x%x\n&quot;, lpExport-&gt;NumberOfFunctions);</span><br><span class="line">	printf(&quot;导出函数名称总数: 0x%x\n&quot;, lpExport-&gt;NumberOfNames);</span><br><span class="line"></span><br><span class="line">	for (int i = 0, j = 0; i &lt; lpExport-&gt;NumberOfFunctions; i++, j = 0) &#123;</span><br><span class="line">		</span><br><span class="line">		for (; j &lt; lpExport-&gt;NumberOfNames; j++) &#123;</span><br><span class="line">			if (i == lpExportFunctionOrdinals[j]) &#123;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		if (j &lt; lpExport-&gt;NumberOfNames) &#123;</span><br><span class="line">			printf(&quot;\n以函数名称导出: \n\t名称: %s\n\t地址: 0x%x\n\t序号: 0x%x\n&quot;, lpBuffer + RvaToFov(</span><br><span class="line">					lpFirstSection,</span><br><span class="line">					secCount,</span><br><span class="line">					lpExportFunctionNames[j]</span><br><span class="line">				),</span><br><span class="line">				lpExportFunctions[i],</span><br><span class="line">				lpExportFunctionOrdinals[j] + lpExport-&gt;Base</span><br><span class="line">			);</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			printf(&quot;\n以序号导出: \n\t地址: 0x%x\n\t序号: 0x%x\n&quot;, lpExportFunctions[i], i + lpExport-&gt;Base);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">exit:</span><br><span class="line">	if (hFile) &#123;</span><br><span class="line">		CloseHandle(hFile);</span><br><span class="line">	&#125;</span><br><span class="line">	if (lpBuffer) &#123;</span><br><span class="line">		VirtualFree(lpBuffer, 0, MEM_RELEASE);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="导入表"><a href="#导入表" class="headerlink" title="导入表"></a>导入表</h4><p>导入表也是比较复杂的, 需要理解导入方式</p>
+<h5 id="相关结构体信息"><a href="#相关结构体信息" class="headerlink" title="相关结构体信息"></a>相关结构体信息</h5><h6 id="导入表-1"><a href="#导入表-1" class="headerlink" title="导入表"></a>导入表</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_IMPORT_DESCRIPTOR &#123;</span><br><span class="line">    union &#123;</span><br><span class="line">        DWORD   Characteristics;            // 0 for terminating null import descriptor</span><br><span class="line">        DWORD   OriginalFirstThunk;         // RVA to original unbound IAT (PIMAGE_THUNK_DATA)</span><br><span class="line">    &#125; DUMMYUNIONNAME;</span><br><span class="line">    DWORD   TimeDateStamp;                  // 0 if not bound,</span><br><span class="line">                                            // -1 if bound, and real date\time stamp</span><br><span class="line">                                            //     in IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT (new BIND)</span><br><span class="line">                                            // O.W. date/time stamp of DLL bound to (Old BIND)</span><br><span class="line"></span><br><span class="line">    DWORD   ForwarderChain;                 // -1 if no forwarders</span><br><span class="line">    DWORD   Name;</span><br><span class="line">    DWORD   FirstThunk;                     // RVA to IAT (if bound this IAT has actual addresses)</span><br><span class="line">&#125; IMAGE_IMPORT_DESCRIPTOR;</span><br><span class="line">typedef IMAGE_IMPORT_DESCRIPTOR UNALIGNED *PIMAGE_IMPORT_DESCRIPTOR;</span><br></pre></td></tr></table></figure>
+
+<h6 id="名称表"><a href="#名称表" class="headerlink" title="名称表"></a>名称表</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_IMPORT_BY_NAME &#123;</span><br><span class="line">    WORD    Hint;</span><br><span class="line">    CHAR   Name[1];</span><br><span class="line">&#125; IMAGE_IMPORT_BY_NAME, *PIMAGE_IMPORT_BY_NAME;</span><br></pre></td></tr></table></figure>
+
+<h6 id="导入名称表与导入地址表"><a href="#导入名称表与导入地址表" class="headerlink" title="导入名称表与导入地址表"></a>导入名称表与导入地址表</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_THUNK_DATA32 &#123;</span><br><span class="line">    union &#123;</span><br><span class="line">        DWORD ForwarderString;      // PBYTE </span><br><span class="line">        DWORD Function;             // PDWORD</span><br><span class="line">        DWORD Ordinal;</span><br><span class="line">        DWORD AddressOfData;        // PIMAGE_IMPORT_BY_NAME</span><br><span class="line">    &#125; u1;</span><br><span class="line">&#125; IMAGE_THUNK_DATA32;</span><br></pre></td></tr></table></figure>
+
+<h6 id="重要字段说明-6"><a href="#重要字段说明-6" class="headerlink" title="重要字段说明"></a>重要字段说明</h6><ul>
+<li><p><strong>导入表</strong></p>
+<ol>
+<li><strong>DUMMYUNIONNAME</strong>:<br> 指向导入名称表的偏移<code>(RVA)</code></li>
+<li><strong>Name</strong>:<br> 导入动态库的名称</li>
+<li><strong>FirstThunk</strong>:<br> 指向导入地址表的偏移<code>(RVA)</code>, 导入地址表在文件中是和导入名称表一样的, 但加载到内存后是不一样的</li>
+</ol>
+</li>
+<li><p><strong>导入名称表与导入地址表</strong></p>
+<ol>
+<li><strong>u1</strong>:<br> 指向的是函数名称的偏移或者序号,<br> 如果是函数明显那么最高位为<code>0</code>否则为序号<br> <em>序号 = ul.Ordinal &amp; ~(0b1 &lt;&lt; 31)</em></li>
+</ol>
+</li>
+<li><p><strong>名称表</strong></p>
+<ol>
+<li><strong>Name</strong><br> 函数名称</li>
+</ol>
+</li>
+</ul>
+<h5 id="打印32位导入表列子"><a href="#打印32位导入表列子" class="headerlink" title="打印32位导入表列子"></a>打印<code>32位</code>导入表列子</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DWORD RvaToFov(PIMAGE_SECTION_HEADER sec, DWORD secCount, DWORD rva) &#123;</span><br><span class="line"></span><br><span class="line">	for (int i = 0; i &lt; secCount; i++) &#123;</span><br><span class="line">		</span><br><span class="line">		if (sec-&gt;VirtualAddress &lt;= rva &amp;&amp; sec-&gt;VirtualAddress + sec-&gt;SizeOfRawData &gt;= rva) &#123;</span><br><span class="line">			return rva - sec-&gt;VirtualAddress + sec-&gt;PointerToRawData;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		sec++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void printImportTable(const char* peFileName) &#123;</span><br><span class="line">	DWORD fileSize = 0, readSize = 0, secCount = 0;</span><br><span class="line">	LPBYTE lpBuffer = NULL;</span><br><span class="line">	HANDLE hFile = NULL;</span><br><span class="line">	PIMAGE_DOS_HEADER lpDosHeader = NULL; // dos头</span><br><span class="line">	PIMAGE_NT_HEADERS32 lpNtHeader = NULL; // nt头</span><br><span class="line">	PIMAGE_SECTION_HEADER lpFirstSection = NULL; // 节表</span><br><span class="line">	</span><br><span class="line">	PIMAGE_THUNK_DATA32 </span><br><span class="line">		lpIntHeader = NULL, // 导入名称表 </span><br><span class="line">		lpIatHeader = NULL; // 导入地址表</span><br><span class="line"></span><br><span class="line">	PIMAGE_IMPORT_BY_NAME lpImportName = NULL;</span><br><span class="line">	PIMAGE_IMPORT_DESCRIPTOR lpImport = NULL;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	hFile = CreateFileA(peFileName, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);</span><br><span class="line"></span><br><span class="line">	if (!hFile) &#123;</span><br><span class="line">		printf(&quot;读取%s失败\n&quot;, peFileName);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fileSize = GetFileSize(hFile, NULL);</span><br><span class="line"></span><br><span class="line">	lpBuffer = (LPBYTE)VirtualAlloc(NULL, fileSize, MEM_COMMIT, PAGE_READWRITE);</span><br><span class="line"></span><br><span class="line">	if (!lpBuffer) &#123;</span><br><span class="line">		printf(&quot;分配内存失败 %d\n&quot;, fileSize);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (!ReadFile(hFile, lpBuffer, fileSize, &amp;readSize, NULL)) &#123;</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	lpDosHeader = (PIMAGE_DOS_HEADER)lpBuffer;</span><br><span class="line"></span><br><span class="line">	if (lpDosHeader-&gt;e_magic != IMAGE_DOS_SIGNATURE) &#123;</span><br><span class="line">		printf(&quot;不是一个有效的PE文件\n&quot;);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	lpNtHeader = (PIMAGE_NT_HEADERS32)(lpBuffer + lpDosHeader-&gt;e_lfanew);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	if (lpNtHeader-&gt;Signature != IMAGE_NT_SIGNATURE) &#123;</span><br><span class="line">		printf(&quot;不是一个有效的PE文件\n&quot;);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (lpNtHeader-&gt;OptionalHeader.Magic != IMAGE_NT_OPTIONAL_HDR32_MAGIC) &#123;</span><br><span class="line">		printf(&quot;不是一个32位PE文件\n&quot;);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	secCount = lpNtHeader-&gt;FileHeader.NumberOfSections;</span><br><span class="line">	lpFirstSection = (PIMAGE_SECTION_HEADER)((LPBYTE)&amp;lpNtHeader-&gt;OptionalHeader + lpNtHeader-&gt;FileHeader.SizeOfOptionalHeader);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	lpImport = (PIMAGE_IMPORT_DESCRIPTOR)(lpBuffer + RvaToFov(</span><br><span class="line">		lpFirstSection, </span><br><span class="line">		secCount, </span><br><span class="line">		lpNtHeader-&gt;OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress)</span><br><span class="line">	);</span><br><span class="line"></span><br><span class="line">	while (lpImport-&gt;Name != 0) &#123;</span><br><span class="line">		</span><br><span class="line">		printf(&quot;\n 导入动态库名称: %s\n&quot;, (lpBuffer + RvaToFov(</span><br><span class="line">			lpFirstSection,</span><br><span class="line">			secCount,</span><br><span class="line">			lpImport-&gt;Name</span><br><span class="line">		)));</span><br><span class="line"></span><br><span class="line">		lpIntHeader = (PIMAGE_THUNK_DATA32)(lpBuffer + RvaToFov(</span><br><span class="line">			lpFirstSection,</span><br><span class="line">			secCount,</span><br><span class="line">			lpImport-&gt;OriginalFirstThunk</span><br><span class="line">		));</span><br><span class="line">	</span><br><span class="line">		lpIatHeader = (PIMAGE_THUNK_DATA32)(lpBuffer + RvaToFov(</span><br><span class="line">			lpFirstSection,</span><br><span class="line">			secCount,</span><br><span class="line">			lpImport-&gt;FirstThunk</span><br><span class="line">		));</span><br><span class="line">		</span><br><span class="line">		while (lpIntHeader-&gt;u1.Function != 0) &#123;</span><br><span class="line">		</span><br><span class="line">			if (lpIatHeader-&gt;u1.Function &gt;&gt; 31 == 1) &#123;</span><br><span class="line">				printf(&quot;\t序号导入: 0x%x\n&quot;, lpIatHeader-&gt;u1.Ordinal &amp; ~(0b1 &lt;&lt; 31));</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				lpImportName = (PIMAGE_IMPORT_BY_NAME)(lpBuffer + RvaToFov(</span><br><span class="line">					lpFirstSection,</span><br><span class="line">					secCount,</span><br><span class="line">					lpIatHeader-&gt;u1.Function</span><br><span class="line">				));</span><br><span class="line"></span><br><span class="line">				printf(&quot;\t名称导入: %s\n&quot;, lpImportName-&gt;Name);</span><br><span class="line">			&#125;</span><br><span class="line">	</span><br><span class="line">			lpIntHeader++;</span><br><span class="line">			lpIatHeader++;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		lpImport++;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">exit:</span><br><span class="line"></span><br><span class="line">	if (hFile) &#123;</span><br><span class="line">		CloseHandle(hFile);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (lpBuffer) &#123;</span><br><span class="line">		VirtualFree(lpBuffer, 0, MEM_RELEASE);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="重定位表"><a href="#重定位表" class="headerlink" title="重定位表"></a>重定位表</h4><h5 id="结构体信息-7"><a href="#结构体信息-7" class="headerlink" title="结构体信息"></a>结构体信息</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _IMAGE_BASE_RELOCATION &#123;</span><br><span class="line">    DWORD   VirtualAddress;</span><br><span class="line">    DWORD   SizeOfBlock;</span><br><span class="line">//  WORD    TypeOffset[1];</span><br><span class="line">&#125; IMAGE_BASE_RELOCATION;</span><br><span class="line">typedef IMAGE_BASE_RELOCATION UNALIGNED * PIMAGE_BASE_RELOCATION;</span><br></pre></td></tr></table></figure>
+<h5 id="重要字段说明-7"><a href="#重要字段说明-7" class="headerlink" title="重要字段说明"></a>重要字段说明</h5><ol>
+<li><strong>VirtualAddress</strong>:<br> 偏移基址</li>
+<li><strong>SizeOfBlock</strong>:<br> 当前表大小</li>
+</ol>
+<h5 id="打印重定位表列子"><a href="#打印重定位表列子" class="headerlink" title="打印重定位表列子"></a>打印重定位表列子</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">DWORD RvaToFov(PIMAGE_SECTION_HEADER sec, DWORD secCount, DWORD rva) &#123;</span><br><span class="line"></span><br><span class="line">	for (int i = 0; i &lt; secCount; i++) &#123;</span><br><span class="line">		</span><br><span class="line">		if (sec-&gt;VirtualAddress &lt;= rva &amp;&amp; sec-&gt;VirtualAddress + sec-&gt;SizeOfRawData &gt;= rva) &#123;</span><br><span class="line">			return rva - sec-&gt;VirtualAddress + sec-&gt;PointerToRawData;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		sec++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void printRelocTable(const char* peFileName) &#123;</span><br><span class="line">	DWORD fileSize = 0, readSize = 0, secCount = 0;</span><br><span class="line">	LPBYTE lpBuffer = NULL;</span><br><span class="line">	HANDLE hFile = NULL;</span><br><span class="line">	LPWORD lpRelocAddress = NULL;</span><br><span class="line">	PIMAGE_DOS_HEADER lpDosHeader = NULL; // dos头</span><br><span class="line">	PIMAGE_NT_HEADERS32 lpNtHeader = NULL; // nt头</span><br><span class="line">	PIMAGE_SECTION_HEADER lpFirstSection = NULL; // 节表</span><br><span class="line">	PIMAGE_BASE_RELOCATION lpRelocHeader = NULL;</span><br><span class="line"></span><br><span class="line">	hFile = CreateFileA(peFileName, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);</span><br><span class="line"></span><br><span class="line">	if (!hFile) &#123;</span><br><span class="line">		printf(&quot;读取%s失败\n&quot;, peFileName);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fileSize = GetFileSize(hFile, NULL);</span><br><span class="line"></span><br><span class="line">	lpBuffer = (LPBYTE)VirtualAlloc(NULL, fileSize, MEM_COMMIT, PAGE_READWRITE);</span><br><span class="line"></span><br><span class="line">	if (!lpBuffer) &#123;</span><br><span class="line">		printf(&quot;分配内存失败 %d\n&quot;, fileSize);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (!ReadFile(hFile, lpBuffer, fileSize, &amp;readSize, NULL)) &#123;</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	lpDosHeader = (PIMAGE_DOS_HEADER)lpBuffer;</span><br><span class="line"></span><br><span class="line">	if (lpDosHeader-&gt;e_magic != IMAGE_DOS_SIGNATURE) &#123;</span><br><span class="line">		printf(&quot;不是一个有效的PE文件\n&quot;);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	lpNtHeader = (PIMAGE_NT_HEADERS32)(lpBuffer + lpDosHeader-&gt;e_lfanew);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	if (lpNtHeader-&gt;Signature != IMAGE_NT_SIGNATURE) &#123;</span><br><span class="line">		printf(&quot;不是一个有效的PE文件\n&quot;);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (lpNtHeader-&gt;OptionalHeader.Magic != IMAGE_NT_OPTIONAL_HDR32_MAGIC) &#123;</span><br><span class="line">		printf(&quot;不是一个32位PE文件\n&quot;);</span><br><span class="line">		goto exit;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	secCount = lpNtHeader-&gt;FileHeader.NumberOfSections;</span><br><span class="line">	lpFirstSection = (PIMAGE_SECTION_HEADER)((LPBYTE)&amp;lpNtHeader-&gt;OptionalHeader + lpNtHeader-&gt;FileHeader.SizeOfOptionalHeader);</span><br><span class="line"></span><br><span class="line">	lpRelocHeader = (PIMAGE_BASE_RELOCATION)(lpBuffer + RvaToFov(</span><br><span class="line">		lpFirstSection,</span><br><span class="line">		secCount,</span><br><span class="line">		lpNtHeader-&gt;OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_BASERELOC].VirtualAddress)</span><br><span class="line">	);</span><br><span class="line"></span><br><span class="line">	while (lpRelocHeader-&gt;SizeOfBlock != 0) &#123;</span><br><span class="line">	</span><br><span class="line">		printf(&quot;\n重定位修复: &quot;);</span><br><span class="line">		printf(&quot;\n\t基址(RVA): 0x%x&quot;, lpRelocHeader-&gt;VirtualAddress);</span><br><span class="line">		printf(&quot;\n\t块儿大小: 0x%x&quot;, lpRelocHeader-&gt;SizeOfBlock);</span><br><span class="line">		printf(&quot;\n\t需要重定位数量: 0x%x&quot;, (lpRelocHeader-&gt;SizeOfBlock - 8) / 2);</span><br><span class="line">	</span><br><span class="line">		lpRelocAddress = (LPWORD)((LPBYTE)lpRelocHeader + 8);</span><br><span class="line"></span><br><span class="line">		for (int i = 0; i &lt; (lpRelocHeader-&gt;SizeOfBlock - 8) / 2; i++) &#123;</span><br><span class="line">			</span><br><span class="line">			if (lpRelocAddress[i] &gt;&gt; 12 == 3) &#123;</span><br><span class="line">				DWORD addrOffset = lpRelocAddress[i] &amp; 0xFFF;</span><br><span class="line">				DWORD addrValue = *((DWORD *)(lpBuffer + RvaToFov(</span><br><span class="line">					lpFirstSection,</span><br><span class="line">					secCount,</span><br><span class="line">					addrOffset + lpRelocHeader-&gt;VirtualAddress</span><br><span class="line">				)));</span><br><span class="line"></span><br><span class="line">				printf(&quot;\n\t地址(RVA): 0x%x&quot;,  addrOffset + lpRelocHeader-&gt;VirtualAddress);</span><br><span class="line">				printf(&quot;\n\t当前值: 0x%x&quot;, addrValue);</span><br><span class="line">				printf(&quot;\n\t偏移: 0x%x\n&quot;, addrValue - lpNtHeader-&gt;OptionalHeader.ImageBase);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">		lpRelocHeader = (PIMAGE_BASE_RELOCATION)((LPBYTE)lpRelocHeader + lpRelocHeader-&gt;SizeOfBlock);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">exit:</span><br><span class="line"></span><br><span class="line">	if (hFile) &#123;</span><br><span class="line">		CloseHandle(hFile);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (lpBuffer) &#123;</span><br><span class="line">		VirtualFree(lpBuffer, 0, MEM_RELEASE);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>接下来阅读</span></section><section class="body fs14"><a id="next" href="/2021/03/21/c-01-log/">记一次C内存溢出问题<span class="note">较早</span></a><div class="line"></div><div class="line"></div><a id="more" href="/archives">检索全部文章</a></section></div>
+
+
+<div class="related-wrap reveal" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2020/11/08/acm-01/" title="acm-士兵队列训练问题"><div class="img"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://source.unsplash.com/1280x640/?C,Acm,Algorithm" /></div><span class="title">acm-士兵队列训练问题</span></a></div></section></div>
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<p>本站由 <a href="http://editso.github.io/">@zy</a> 创建，使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.5.2" title="v1.5.2">Stellar</a> 作为主题。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.5.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
