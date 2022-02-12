@@ -5,6 +5,9 @@ tags:
      - Linux
      - C
      - 编程
+categories:
+  - Linux
+  - API
 ---
 # Linux系统函数学习
 

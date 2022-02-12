@@ -5,6 +5,9 @@ tags:
 - Linux
 - C
 - GCC
+categories:
+  - 问题记录
+  - C相关
 ---
 
 #  记一次`C`内存溢出问题

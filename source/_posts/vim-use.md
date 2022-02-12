@@ -4,6 +4,9 @@ date: 2019-11-27 16:30:34
 tags:
     - 学习笔记
     - Editor
+categories:
+  - 软件相关
+  - Vim
 ---
 # `vim` 学习笔记
 

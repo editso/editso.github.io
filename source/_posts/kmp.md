@@ -5,6 +5,8 @@ tags:
     - Algorithm
     - 编程
     - Code
+categories:
+  - 算法学习
 ---
 
 # 字符串匹配算法-KMP

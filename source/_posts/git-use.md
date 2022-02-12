@@ -5,6 +5,9 @@ tags:
     - 学习笔记
     - 仓库
     - GIT
+categories:
+  - 软件相关
+  - GIT
 ---
 # GIT仓库的使用
 

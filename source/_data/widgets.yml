@@ -2,7 +2,7 @@ welcome:
   layout: markdown
   title: "..."
   content:
-    - 这个人很懒, 什么都不想写
+    - ...
 
 toc:
   layout: toc

@@ -5,6 +5,9 @@ tags:
 - 学习笔记
 - C
 - GCC
+categories:
+  - 软件相关
+  - GCC
 ---
 # GCC 常见命令参数的使用
 

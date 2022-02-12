@@ -5,6 +5,9 @@ tags:
 - GDB
 - C
 - 学习笔记
+categories:
+  - 软件相关
+  - GDB
 ---
 # gdb调试工具的使用
 

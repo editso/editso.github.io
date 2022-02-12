@@ -4,6 +4,9 @@ date: 2020-10-30 23:19:26
 tags:
     - 日志
     - VirtualBox
+categories:
+  - 软件相关
+  - VirtualBox
 ---
 # `VirtualBox` 无法启用嵌套分页
 ![问题截图](/public/images/virtualbox/nested.png)

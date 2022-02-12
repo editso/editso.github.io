@@ -3,6 +3,9 @@ title: makefile文件的使用
 date: 2019-11-28 11:01:00
 tags:
     - Make
+categories:
+    - 软件相关
+    - Make
 ---
 # makefile文件的使用
 

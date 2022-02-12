@@ -6,6 +6,9 @@ tags:
     - Linux
     - Ubuntu
     - 日志
+categories:
+  - Linux
+  - Ubuntu
 ---
 # Ubuntu使用
 

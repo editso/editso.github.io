@@ -5,6 +5,8 @@ tags:
     - 壁纸
     - Desktop
     - Theme
+categories:
+  - 杂项
 ---
 # 桌面壁纸网站
 

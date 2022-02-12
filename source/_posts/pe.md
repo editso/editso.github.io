@@ -2,6 +2,11 @@
 title: PE头文件学习笔记
 date: 2021-11-05 13:01:22
 tags:
+	- PE
+	- Windows
+categories:
+  - Windows
+  - PE
 ---
 
 ## [可移植可执行](https://zh.wikipedia.org/wiki/%E5%8F%AF%E7%A7%BB%E6%A4%8D%E5%8F%AF%E6%89%A7%E8%A1%8C)

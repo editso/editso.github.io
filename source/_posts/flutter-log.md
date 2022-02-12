@@ -5,6 +5,9 @@ tags:
     - 日志
     - 踩坑
     - Flutter
+categories:
+  - 问题记录
+  - Flutter
 ---
 ## 使用Flutter run 出现错误:
 

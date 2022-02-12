@@ -9,19 +9,43 @@ subtitle: ''
 description: '永远相信美好的事情即将到来'
 keywords:
 author: zy
-language:
-  - zh-CN
-  - en
+language: zh-CN
 timezone: ''
 
+
+### Adds nofollow attribute to all external links in your hexo blog posts automatically.
+nofollow:
+  enable: true
+  exclude:
+    - <your site url domain> # eg: zthxxx.me
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: http://editso.github.io
-permalink: :year/:month/:day/:title/
+# permalink: :year/:month/:day/:title/
+permalink: wiki/:title/
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
+
+
+
+jsonContent:
+  meta: false
+  pages:
+    title: true
+    date: true
+    path: true
+    text: true
+  posts:
+    title: true
+    date: true
+    path: true
+    text: true
+    tags: true
+    categories: true
+  ignore:
+    - 404.html
 
 # Directory
 source_dir: source
@@ -32,6 +56,8 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - README.md
+  - '_posts/**/embed_page/**'
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -100,7 +126,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: stellar
+theme: Wikitten
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

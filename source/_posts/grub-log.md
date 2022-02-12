@@ -6,6 +6,9 @@ tags:
 - Manjaro
 - Windows
 - Linux
+categories:
+  - 问题记录
+  - Grub
 ---
 
 # `GRUB`双系统找不到`Windows`问题

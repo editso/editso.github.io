@@ -6,6 +6,9 @@ tags:
     - 日志
     - 踩坑记
     - 数据库
+categories:
+  - 软件相关
+  - Mysql
 ---
 # Mysql8.0采坑
 

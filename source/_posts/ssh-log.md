@@ -6,6 +6,9 @@ tags:
     - 踩坑记
     - Linux
     - SSH
+categories:
+  - Linux
+  - SSH
 ---
 # SSH免密登陆失效
 在本地使用`ssh-keygen`生成密钥  

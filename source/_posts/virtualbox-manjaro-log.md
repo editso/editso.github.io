@@ -6,6 +6,9 @@ tags:
     - Linux
     - VirtualBox
     - Kde
+categories:
+  - Linux
+  - Manjaro
 ---
 
 ## 问题截图
