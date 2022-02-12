@@ -137,6 +137,15 @@
   </url>
   
   <url>
+    <loc>http://editso.github.io/wiki/pe/</loc>
+    
+    <lastmod>2022-02-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://editso.github.io/wiki/ssh-log/</loc>
     
     <lastmod>2022-02-12</lastmod>
@@ -201,15 +210,6 @@
   
   <url>
     <loc>http://editso.github.io/wiki/windows-thread-local/</loc>
-    
-    <lastmod>2022-02-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://editso.github.io/wiki/pe/</loc>
     
     <lastmod>2022-02-12</lastmod>
     
@@ -422,6 +422,13 @@
   </url>
   
   <url>
+    <loc>http://editso.github.io/tags/PE/</loc>
+    <lastmod>2022-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://editso.github.io/tags/SSH/</loc>
     <lastmod>2022-02-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -472,13 +479,6 @@
   
   <url>
     <loc>http://editso.github.io/tags/Desktop/</loc>
-    <lastmod>2022-02-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://editso.github.io/tags/PE/</loc>
     <lastmod>2022-02-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -550,6 +550,13 @@
   </url>
   
   <url>
+    <loc>http://editso.github.io/categories/Windows/</loc>
+    <lastmod>2022-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://editso.github.io/categories/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/GDB/</loc>
     <lastmod>2022-02-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -592,13 +599,6 @@
   </url>
   
   <url>
-    <loc>http://editso.github.io/categories/Windows/</loc>
-    <lastmod>2022-02-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://editso.github.io/categories/Linux/API/</loc>
     <lastmod>2022-02-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -620,6 +620,13 @@
   </url>
   
   <url>
+    <loc>http://editso.github.io/categories/Windows/PE/</loc>
+    <lastmod>2022-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://editso.github.io/categories/Linux/SSH/</loc>
     <lastmod>2022-02-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -628,13 +635,6 @@
   
   <url>
     <loc>http://editso.github.io/categories/Linux/Ubuntu/</loc>
-    <lastmod>2022-02-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://editso.github.io/categories/Windows/PE/</loc>
     <lastmod>2022-02-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
