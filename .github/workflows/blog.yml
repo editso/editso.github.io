@@ -5,7 +5,7 @@ on:
     branches:
       - hexo # default branch
   workflow_dispatch:
-      - hexo
+    
 
 jobs:
   pages:
