@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    
+    <title>GIT仓库的使用 | editso</title>
+    
+    
+        <meta name="keywords" content="学习笔记,仓库,GIT">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="GIT仓库的使用配置基本信息 git config --global user.name &quot;用户名&quot;   git config --global user.email &quot;邮箱&quot;  克隆分支 git clone xxxxxx.git  同步分支 git clone xxxxxx.git - b 分支名  上传提交信息 git commit  -m  &amp;quot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GIT仓库的使用">
+<meta property="og:url" content="http://editso.github.io/wiki/git-use/index.html">
+<meta property="og:site_name" content="editso">
+<meta property="og:description" content="GIT仓库的使用配置基本信息 git config --global user.name &quot;用户名&quot;   git config --global user.email &quot;邮箱&quot;  克隆分支 git clone xxxxxx.git  同步分支 git clone xxxxxx.git - b 分支名  上传提交信息 git commit  -m  &amp;quot">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-07-31T09:10:00.000Z">
+<meta property="article:modified_time" content="2022-02-12T14:42:33.507Z">
+<meta property="article:author" content="zy">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="仓库">
+<meta property="article:tag" content="GIT">
+<meta name="twitter:card" content="summary">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="editso" type="application/atom+xml">
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">editso</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>分类</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            API
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/linux-func-use/">linux系统函数学习</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Manjaro
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/manjaro-use/">Manjaro系统的使用</a></li>  <li class="file"><a href="/wiki/virtualbox-manjaro-log/">记录一次Manjaro下VirtualBox界面文字不显示,黑屏</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            SSH
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/ssh-log/">记录一次服务器免密登录失效问题</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Ubuntu
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/ubuntu-theme/">ubuntu使用</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Windows
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            PE
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/pe/">PE头文件学习笔记</a></li>  <li class="file"><a href="/wiki/windows-thread-local/">线程局部存储(TLS)</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            杂项
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/wallpaper/">桌面壁纸网站</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法学习
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/kmp/">字符串匹配算法-KMP</a></li>  <li class="file"><a href="/wiki/acm-01/">acm-士兵队列训练问题</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            软件相关
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            GCC
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/gcc-use/">GCC 常见命令参数的使用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            GDB
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/gdb-use/">gdb调试工具的使用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            GIT
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file active"><a href="/wiki/git-use/">GIT仓库的使用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Make
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/makefile-use/">makefile文件的使用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Mysql
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/mysql-log/">mysql8.0踩坑</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Vim
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/vim-use/">vim编辑器使用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            VirtualBox
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/virtualbox-log/">解决VirtualBox无法启用嵌套分页</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            问题记录
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            C相关
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/c-log/">记录一次学习C++时编译失败出现(multiple definition of xxx first defined here collect2)</a></li>  <li class="file"><a href="/wiki/c-01-log/">记一次C内存溢出问题</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Flutter
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/flutter-log/">记录一次Flutter run时出现的错误</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Grub
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/grub-log/">GRUB双系统找不到Windows问题</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            前端相关
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/vue-log/">记录一次使用vue-cli4.0 创建项目时非常慢问题</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><span>标签云</span></h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Acm/" style="font-size: 10px;">Acm</a> <a href="/tags/Algorithm/" style="font-size: 11.67px;">Algorithm</a> <a href="/tags/C/" style="font-size: 16.67px;">C</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Code/" style="font-size: 10px;">Code</a> <a href="/tags/Desktop/" style="font-size: 10px;">Desktop</a> <a href="/tags/Editor/" style="font-size: 10px;">Editor</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/GCC/" style="font-size: 11.67px;">GCC</a> <a href="/tags/GDB/" style="font-size: 10px;">GDB</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GRUB/" style="font-size: 10px;">GRUB</a> <a href="/tags/Kde/" style="font-size: 10px;">Kde</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/Make/" style="font-size: 10px;">Make</a> <a href="/tags/Manjaro/" style="font-size: 10px;">Manjaro</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/PE/" style="font-size: 10px;">PE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Theme/" style="font-size: 11.67px;">Theme</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VirtualBox/" style="font-size: 11.67px;">VirtualBox</a> <a href="/tags/Windows/" style="font-size: 11.67px;">Windows</a> <a href="/tags/%E4%BB%93%E5%BA%93/" style="font-size: 10px;">仓库</a> <a href="/tags/%E5%A3%81%E7%BA%B8/" style="font-size: 10px;">壁纸</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">学习笔记</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 20px;">日志</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">系统</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 11.67px;">编程</a> <a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 10px;">踩坑</a> <a href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 13.33px;">踩坑记</a>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-git-use" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/">软件相关</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/GIT/">GIT</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/GIT/" rel="tag">GIT</a>, <a class="tag-link-link" href="/tags/%E4%BB%93%E5%BA%93/" rel="tag">仓库</a>, <a class="tag-link-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/git-use/">
+            <time datetime="2019-07-31T09:10:00.000Z" itemprop="datePublished">2019-07-31</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            GIT仓库的使用
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h1 id="GIT仓库的使用"><a href="#GIT仓库的使用" class="headerlink" title="GIT仓库的使用"></a>GIT仓库的使用</h1><h2 id="配置基本信息"><a href="#配置基本信息" class="headerlink" title="配置基本信息"></a>配置基本信息</h2><ul>
+<li><code>git config --global user.name &quot;用户名&quot;</code>  </li>
+<li><code>git config --global user.email &quot;邮箱&quot;</code></li>
+</ul>
+<h2 id="克隆分支"><a href="#克隆分支" class="headerlink" title="克隆分支"></a>克隆分支</h2><ul>
+<li><code>git clone xxxxxx.git</code></li>
+</ul>
+<h2 id="同步分支"><a href="#同步分支" class="headerlink" title="同步分支"></a>同步分支</h2><ul>
+<li><code>git clone xxxxxx.git - b 分支名</code></li>
+</ul>
+<h2 id="上传提交信息"><a href="#上传提交信息" class="headerlink" title="上传提交信息"></a>上传提交信息</h2><ul>
+<li><code>git commit  -m  &quot;提交信息&quot;</code></li>
+</ul>
+<h2 id="将本地的库链接到仓库"><a href="#将本地的库链接到仓库" class="headerlink" title="将本地的库链接到仓库"></a>将本地的库链接到仓库</h2><ul>
+<li><code>git remote add origin xxxxx.git</code></li>
+</ul>
+<h2 id="查看代码的修改状态"><a href="#查看代码的修改状态" class="headerlink" title="查看代码的修改状态"></a>查看代码的修改状态</h2><ul>
+<li><code>git status</code></li>
+</ul>
+<h2 id="红色或绿色部分字体是工程内的发生修改的状态标识"><a href="#红色或绿色部分字体是工程内的发生修改的状态标识" class="headerlink" title="红色或绿色部分字体是工程内的发生修改的状态标识"></a>红色或绿色部分字体是工程内的发生修改的状态标识</h2><ul>
+<li><code>modified</code> 代表文件和上一版本相比，有过修改  </li>
+<li><code>new file</code>  代表文件是新增加的  </li>
+<li><code>deleted</code>   代表文件被删除了，提交成功后，文件将从repository中删除  </li>
+<li><code>untracked file</code> 一般都是新增加的文件夹</li>
+</ul>
+<h2 id="查看代码的修改内容"><a href="#查看代码的修改内容" class="headerlink" title="查看代码的修改内容"></a>查看代码的修改内容</h2><ul>
+<li><code>git diff &lt;filename&gt;</code></li>
+</ul>
+<h2 id="添加一个文件"><a href="#添加一个文件" class="headerlink" title="添加一个文件"></a>添加一个文件</h2><ul>
+<li><code>git add &lt;filename&gt;</code></li>
+</ul>
+<h2 id="删除一个不需要的文件"><a href="#删除一个不需要的文件" class="headerlink" title="删除一个不需要的文件"></a>删除一个不需要的文件</h2><ul>
+<li><code>git rm &lt;filename&gt;</code></li>
+</ul>
+<h2 id="增加全部需要上传的文件"><a href="#增加全部需要上传的文件" class="headerlink" title="增加全部需要上传的文件"></a>增加全部需要上传的文件</h2><ul>
+<li><code>git add --all</code></li>
+<li><code>git add -A</code></li>
+<li><code>git add .</code></li>
+</ul>
+<h2 id="如果发现有文件漏提或注释有误，使用amend修正"><a href="#如果发现有文件漏提或注释有误，使用amend修正" class="headerlink" title="如果发现有文件漏提或注释有误，使用amend修正"></a>如果发现有文件漏提或注释有误，使用<code>amend</code>修正</h2><ul>
+<li><code>git commit --amend</code><br>  注意：使用commit命令只是将修改提交到本地仓库</li>
+</ul>
+<h2 id="同步到服务器前先需要将服务器代码同步到本地"><a href="#同步到服务器前先需要将服务器代码同步到本地" class="headerlink" title="同步到服务器前先需要将服务器代码同步到本地"></a>同步到服务器前先需要将服务器代码同步到本地</h2><ul>
+<li><code>git pull</code><br>  如果执行失败，就按照提示还原有冲突的文件，然后再次尝试同步<br>  <code>git checkout -- &lt;有冲突的文件路径&gt;</code></li>
+</ul>
+<h2 id="同步到服务器"><a href="#同步到服务器" class="headerlink" title="同步到服务器"></a>同步到服务器</h2><ul>
+<li><code>git push origin  &lt;本地分支名&gt;</code><br>  如果执行失败，一般是没有将服务器代码同步到本地导致的，先执行上面的<code>git pull</code>命令。</li>
+</ul>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/wiki/gcc-use/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    GCC 常见命令参数的使用
+                
+            </div>
+        </a>
+    
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            zy &copy; 2022 
+            <a rel="external nofollow noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
