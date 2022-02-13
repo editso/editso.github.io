@@ -41,7 +41,7 @@ widgets: # default use category only
     # - archive
     # - tag
     - tagcloud
-    # - links
+    - links
     
 # Excerpt 
 ## Auto creat excerpt with not <!--more-->
@@ -91,3 +91,4 @@ miscellaneous:
         twitter_id:
         google_plus:
     links:
+        ifish: https://if1sh.com
